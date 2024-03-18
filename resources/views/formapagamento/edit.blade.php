@@ -50,7 +50,6 @@
                                         <td>{{$formaPgt->descricao}}</td>
                                         <td>{{$formaPgt->diacompra}}</td>
                                         <td>{{$formaPgt->diavencimento}}</td>
-                                        </td>
                                         <td><a class="btn btn-block btn-warning" href="{{ route('formadepagamento.edit', [$formaPgt->id])}}"> <i class="fa fa-edit"></i> Editar</a></td>
                                         <td>
                                             <form action="{{ route('formadepagamento.excluir',  $formaPgt->id )}}" method="get">
@@ -75,26 +74,28 @@
                 <div class="card-body">
                     <div class="card card-info">
                         <div class="card-header">
-                        <h3 class="card-title">Editar / Novo</h3>
+                        <h3 class="card-title">Editar</h3>
                         </div>
 
 
-                        <form class="form-horizontal" action="{{ route('formadepagamento.store')}}" method="POST">
+                        <form class="form-horizontal" action="{{ route('formadepagamento.update', [$formaPgto->id])}}" method="POST">
                             @csrf
+                            @method('PUT')
                             <div class="card-body">
                                 <div class="row">
-
+                                    
                                     <div class="col-8">
+                                        <input type="hidden" name="id" value="{{ $formaPgto->id }}">
                                         <label for="inputDescricao" class="col-sm-12 col-form-label">Descrição</label>
-                                        <input type="text" name="descricao" class="form-control" id="inputDescricao" placeholder="Descrição">
+                                        <input type="text" name="descricao" class="form-control" id="inputDescricao" value="{{ $formaPgto->descricao }}">
                                     </div>
                                     <div class="col-2">
                                         <label for="inputCompra" class="col-sm-12 col-form-label">Dia para Compra</label>
-                                        <input type="number" name="diacompra" class="form-control" id="inputCompra" >
+                                        <input type="number" name="diacompra" class="form-control" id="inputCompra" value="{{ $formaPgto->diacompra }}">
                                     </div>
                                     <div class="col-2">
                                         <label for="inputVencimento" class="col-sm-12 col-form-label">Vencimento</label>
-                                        <input type="number" name="diavencimento" class="form-control" id="inputVencimento" >
+                                        <input type="number" name="diavencimento" class="form-control" id="inputVencimento" value="{{ $formaPgto->diavencimento }}">
                                     </div>
                                 </div>
                             </div>

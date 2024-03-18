@@ -13,7 +13,6 @@ class FormaPagamentoController extends Controller
      */
     public function index()
     {
-        // $formasDePagamento = FormaPagamento::orderBy('descricao');
         $formasDePagamento =  DB::table('forma_pagamentos')->get();
         
         return view('formapagamento.index',compact('formasDePagamento'));
@@ -47,17 +46,22 @@ class FormaPagamentoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(FormaPagamento $formaPagamento)
+    public function edit(FormaPagamento $formaPagamento,string $id)
     {
         //
+        $formaPgto = FormaPagamento::find($id);
+        $formasDePagamento =  DB::table('forma_pagamentos')->get();
+        return view('formapagamento.edit',compact('formaPgto','formasDePagamento'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, FormaPagamento $formaPagamento)
+    public function update(Request $request,  string $id)
     {
-        //
+        $registro = FormaPagamento::find($id);
+        $registro->update($request->all());
+        return redirect()->route('formasdepagamento.index')->with('sucesso', 'Forma de pagamento atualizada com sucesso!!');
     }
 
     /**

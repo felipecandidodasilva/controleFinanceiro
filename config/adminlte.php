@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Financeiro 2',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -334,12 +334,20 @@ return [
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
-            'text' => 'multilevel',
+            'text' => 'cadastro',
             'icon' => 'fas fa-fw fa-share',
             'submenu' => [
                 [
-                    'text' => 'level_one',
-                    'url' => '#',
+                    'text' => 'Formas de pagamento',
+                    'url' => '/formas_de_pagamento',
+                ],
+                [
+                    'text' => 'Grupos',
+                    'url' => '/grupos',
+                ],
+                [
+                    'text' => 'Sub Grupos',
+                    'url' => '/subgrupos',
                 ],
                 [
                     'text' => 'level_one',

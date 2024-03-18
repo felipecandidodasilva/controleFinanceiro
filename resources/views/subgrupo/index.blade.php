@@ -18,7 +18,7 @@
                 <div class="card-body">
                     <div class="card card-info">
                         <div class="card-header">
-                            <h3 class="card-title">Formas de Pagamento</h3>
+                            <h3 class="card-title">subGrupos</h3>
                             <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 150px;">
                                     <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
@@ -34,26 +34,24 @@
                         <div class="card-body table-responsive p-0">
                         <table class="table table-hover text-nowrap">
                         <thead>
-                        <tr>
-                        <th>ID</th>
-                        <th>Descrição</th>
-                        <th>Dia Compra</th>
-                        <th>Dia Vencimento</th>
-                        <th>#</th>
-                        <th>#</th>
-                        </tr>
+                            <tr>
+                                <th>ID</th>
+                                <th>Grupo</th>
+                                <th>Descrição</th>
+                                <th>#</th>
+                                <th>#</th>
+                            </tr>
                             </thead>
                                 <tbody>
-                                    @forelse($formasDePagamento as $formaPgt)
+                                    @forelse($subgrupos as $subgrupo)
                                         <tr>
-                                        <td>{{$formaPgt->id}}</td>
-                                        <td>{{$formaPgt->descricao}}</td>
-                                        <td>{{$formaPgt->diacompra}}</td>
-                                        <td>{{$formaPgt->diavencimento}}</td>
+                                        <td>{{$subgrupo->id}}</td>
+                                        <td>{{$subgrupo->grupo}}</td>
+                                        <td>{{$subgrupo->descricao}}</td>
                                         </td>
-                                        <td><a class="btn btn-block btn-warning" href="{{ route('formadepagamento.edit', [$formaPgt->id])}}"> <i class="fa fa-edit"></i> Editar</a></td>
+                                        <td><a class="btn btn-block btn-warning" href="{{ route('subgrupo.edit', [$subgrupo->id])}}"> <i class="fa fa-edit"></i> Editar</a></td>
                                         <td>
-                                            <form action="{{ route('formadepagamento.excluir',  $formaPgt->id )}}" method="get">
+                                            <form action="{{ route('subgrupo.excluir',  $subgrupo->id )}}" method="get">
                                                 @csrf
                                                 <button type="submit" class="btn btn-block btn-danger">Excluir</button>
                                             </form>
@@ -75,26 +73,31 @@
                 <div class="card-body">
                     <div class="card card-info">
                         <div class="card-header">
-                        <h3 class="card-title">Editar / Novo</h3>
+                        <h3 class="card-title">Novo</h3>
                         </div>
 
 
-                        <form class="form-horizontal" action="{{ route('formadepagamento.store')}}" method="POST">
+                        <form class="form-horizontal" action="{{ route('subgrupo.store')}}" method="POST">
                             @csrf
                             <div class="card-body">
                                 <div class="row">
 
+                                    <div class="col-4">
+                                        <label class="col-sm-12 col-form-label">Grupo</label>
+                                        <select name="grupo_id" class="form-control">
+                                            @forelse ($grupos as $grupo )
+                                                
+                                                <option value="{{ $grupo->id}}">{{ $grupo->descricao}}</option>
+                                                
+                                                @empty
+                                                <p>Sem registros</p>
+                                                
+                                            @endforelse
+                                        </select>
+                                    </div>
                                     <div class="col-8">
                                         <label for="inputDescricao" class="col-sm-12 col-form-label">Descrição</label>
                                         <input type="text" name="descricao" class="form-control" id="inputDescricao" placeholder="Descrição">
-                                    </div>
-                                    <div class="col-2">
-                                        <label for="inputCompra" class="col-sm-12 col-form-label">Dia para Compra</label>
-                                        <input type="number" name="diacompra" class="form-control" id="inputCompra" >
-                                    </div>
-                                    <div class="col-2">
-                                        <label for="inputVencimento" class="col-sm-12 col-form-label">Vencimento</label>
-                                        <input type="number" name="diavencimento" class="form-control" id="inputVencimento" >
                                     </div>
                                 </div>
                             </div>
