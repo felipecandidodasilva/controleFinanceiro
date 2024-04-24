@@ -73,4 +73,6 @@ class FormaPagamentoController extends Controller
         $registro->delete();
         return redirect()->route('formasdepagamento.index')->with('sucesso', 'Forma excluída com sucesso!!');
     }
+
+   
 }

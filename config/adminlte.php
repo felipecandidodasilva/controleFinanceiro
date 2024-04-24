@@ -334,7 +334,23 @@ return [
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
-            'text' => 'cadastro',
+            'text' => 'Lançamentos',
+            'icon' => 'fas fa-dollar-sign',
+            'submenu' => [
+                [
+                    'text' => 'Entradas',
+                    'url' => '/lancamentos/entradas',
+                    'icon' => 'fas fa-thumbs-up',
+                ],
+                [
+                    'text' => 'Saídas',
+                    'url' => '/lancamentos/saidas',
+                    'icon' => 'fas fa-thumbs-down',
+                ]
+            ]
+        ],
+        [
+            'text' => 'Cadastro',
             'icon' => 'fas fa-fw fa-share',
             'submenu' => [
                 [

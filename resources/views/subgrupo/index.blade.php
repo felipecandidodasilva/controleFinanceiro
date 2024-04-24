@@ -18,7 +18,7 @@
                 <div class="card-body">
                     <div class="card card-info">
                         <div class="card-header">
-                            <h3 class="card-title">subGrupos</h3>
+                            <h3 class="card-title">Sub Grupos</h3>
                             <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 150px;">
                                     <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
@@ -36,8 +36,8 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Grupo</th>
                                 <th>Descrição</th>
+                                <th>Grupo</th>
                                 <th>#</th>
                                 <th>#</th>
                             </tr>
@@ -46,8 +46,8 @@
                                     @forelse($subgrupos as $subgrupo)
                                         <tr>
                                         <td>{{$subgrupo->id}}</td>
-                                        <td>{{$subgrupo->grupo}}</td>
                                         <td>{{$subgrupo->descricao}}</td>
+                                        <td>{{$subgrupo->grupo->descricao}}</td>
                                         </td>
                                         <td><a class="btn btn-block btn-warning" href="{{ route('subgrupo.edit', [$subgrupo->id])}}"> <i class="fa fa-edit"></i> Editar</a></td>
                                         <td>

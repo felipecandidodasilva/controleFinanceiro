@@ -3,7 +3,7 @@
 @section('title', 'AdminLTE')
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Dashboard</h1>
+    <h1 class="m-0 text-dark">Lista de {{$infoPagina['titulo']}}</h1>
 @stop
 
 @section('content')
@@ -18,7 +18,7 @@
                 <div class="card-body">
                     <div class="card card-info">
                         <div class="card-header">
-                            <h3 class="card-title">Grupos</h3>
+                            <h3 class="card-title">Lista de {{$infoPagina['titulo']}}</h3>
                             <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 150px;">
                                     <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
@@ -71,7 +71,7 @@
                 <div class="card-body">
                     <div class="card card-info">
                         <div class="card-header">
-                        <h3 class="card-title">Novo</h3>
+                        <h3 class="card-title">Novo {{$infoPagina['titulo']}}</h3>
                         </div>
 
 

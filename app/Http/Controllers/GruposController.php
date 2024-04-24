@@ -10,9 +10,14 @@ class GruposController extends Controller
 {
     public function index()
     {
-        $grupos =  DB::table('grupos')->get();
+
+        $grupos =  grupos::orderBy('descricao')->get();
+        $infoPagina = [
+            'titulo' => 'Grupos'
+        ];
+        // $grupos =  DB::table('grupos')->get();
         
-        return view('grupo.index',compact('grupos'));
+        return view('grupo.index',compact('grupos','infoPagina'));
     }
 
     /**
@@ -47,8 +52,11 @@ class GruposController extends Controller
     {
         //
         $grupo = grupos::find($id);
-        $grupos =  DB::table('grupos')->get();
-        return view('grupo.edit',compact('grupo','grupos'));
+        $grupos =  grupos::all();
+        $infoPagina = [
+            'titulo' => 'Grupos'
+        ];
+        return view('grupo.edit',compact('grupo','grupos','infoPagina'));
     }
 
     /**

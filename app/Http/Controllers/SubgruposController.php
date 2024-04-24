@@ -11,11 +11,15 @@ class SubgruposController extends Controller
 {
     public function index()
     {
-        $subgrupos =  DB::table('subgrupos')->get();
-        $grupos =  DB::table('grupos')->get();
+        // $subgrupos =  DB::table('subgrupos')->get();
+        $subgrupos = subgrupos::with('grupo')->orderBy('descricao')->get();
+        $grupos =  DB::table('grupos')->orderBy('descricao')->get();
+        $infoPagina = [
+            'titulo' => 'Grupos'
+        ]; 
         
-        dd($subgrupos);
-        return view('subgrupo.index',compact('subgrupos','grupos'));
+        // dd($subgrupos);
+        return view('subgrupo.index',compact('subgrupos','grupos','infoPagina'));
     }
 
     /**
@@ -50,8 +54,12 @@ class SubgruposController extends Controller
     {
         //
         $subgrupo = subgrupos::find($id);
-        $subgrupos =  DB::table('subgrupos')->get();
-        return view('subgrupo.edit',compact('subgrupo','subgrupos'));
+        $subgrupos = subgrupos::with('grupo')->orderBy('descricao')->get();
+        $grupos =  grupos::all();
+        $infoPagina = [
+            'titulo' => 'Subgrupos'
+        ]; 
+        return view('subgrupo.edit',compact('subgrupo','subgrupos','grupos','infoPagina'));
     }
 
     /**

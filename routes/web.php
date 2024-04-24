@@ -34,3 +34,18 @@ Route::post('/subgrupo/novo', [App\Http\Controllers\SubgruposController::class, 
 Route::get('/subgrupo/editar/{id}', [App\Http\Controllers\SubgruposController::class, 'edit'])->name('subgrupo.edit');
 Route::put('/subgrupo/editar/{id}', [App\Http\Controllers\SubgruposController::class, 'update'])->name('subgrupo.update');
 Route::get('/subgrupo/excluir/{id}', [App\Http\Controllers\SubgruposController::class, 'destroy'])->name('subgrupo.excluir');
+
+
+Route::get('/lancamentos/{tipo}', [App\Http\Controllers\LancamentoController::class, 'index'])->name('lancamentos.index');
+Route::post('/lancamentos/{tipo}', [App\Http\Controllers\LancamentoController::class, 'index'])->name('lancamentos.filtros');
+Route::post('/lancamento/novo', [App\Http\Controllers\LancamentoController::class, 'store'])->name('lancamento.store');
+Route::get('/lancamento/editar/{id}', [App\Http\Controllers\LancamentoController::class, 'edit'])->name('lancamento.edit');
+Route::put('/lancamento/editar/{id}', [App\Http\Controllers\LancamentoController::class, 'update'])->name('lancamento.update');
+Route::get('/lancamento/excluir/{id}', [App\Http\Controllers\LancamentoController::class, 'destroy'])->name('lancamento.excluir');
+Route::get('/lancamento/gerar/{id}', [App\Http\Controllers\LancamentoController::class, 'gerar'])->name('lancamento.gerar');
+Route::get('/lancamento/baixar/{id}/{pago}', [App\Http\Controllers\LancamentoController::class, 'baixar'])->name('lancamento.baixar');
+
+
+Route::get('/itemLancamento/excluir/{id}', [App\Http\Controllers\ItemLancamentoController::class, 'destroy'])->name('itemLancamento.excluir');
+Route::put('/itemLancamento/editar/{id}', [App\Http\Controllers\ItemLancamentoController::class, 'update'])->name('itemLancamento.update');
+Route::get('/itemLancamento/add/{id}', [App\Http\Controllers\ItemLancamentoController::class, 'adicionar'])->name('itemLancamento.add');

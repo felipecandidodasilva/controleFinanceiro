@@ -11,6 +11,10 @@
         <div class="alert alert-success">
             {{ session('sucesso')}}
         </div>
+    @if((session('falha')))
+        <div class="alert alert-danger">
+            {{ session('falha')}}
+        </div>
     @endif
     <div class="row">
         <div class="col-6">
