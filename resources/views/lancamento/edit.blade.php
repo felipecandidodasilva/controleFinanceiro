@@ -199,21 +199,20 @@
                             <h3 class="card-title">Adicionar Parcelas</h3>
                         </div>
                         <div class="m-2">
-                            <form action="{{ route('itemLancamento.add', $lancamento->id) }}" method="GET" class="form-horizontal">
+                            <form action="{{ route('itemLancamento.add', $lancamento->id) }}" method="GET" class="form-inline">
                                 @csrf
-                                <div class="row">
-                                    <div class="col">
-                                        <label for="addQtdParc">Quantidade</label>
-                                        <input type="number" name="addQtdParc" id="addQtdParc" class="form-control" aria-label="Quantidade Parcela">
+
+                                <form class="form-inline">
+                                    <div class="form-group mb-2">
+                                      <label for="addQtdParc" class="">Quantidade</label>
+                                      <input type="number"  name="addQtdParc" id="addQtdParc" class="form-control" aria-label="Quantidade Parcela">
                                     </div>
-                                    <div class="col">
-                                        <label for="addVlrParc"> Valor Parcela</label>
-                                        <input type="number" name="addVlrParc" id="addVlrParc" class="form-control" aria-label="Valor Parcela" value="{{$itemLancamento->valor}}">
+                                    <div class="form-group mx-sm-3 mb-2">
+                                      <label for="addVlrParc"> Valor Parcela</label>
+                                      <input type="number" step="0.01" name="addVlrParc" id="addVlrParc" class="form-control" aria-label="Valor Parcela" value="{{$itemLancamento->valor}}">
                                     </div>
-                                    <div class="col">
-                                        <input type="submit" value=" + " class="btn btn-success" aria-label="Valor Parcela">
-                                    </div>
-                                </div>
+                                    <button type="submit" class="btn btn-primary mb-2"> + </button>
+                                  </form>
                             </form>
                         </div>
                     </div>
@@ -223,7 +222,7 @@
                 <div class="card-body">
                     <div class="card card-info">
                         <div class="card-header">
-                        <h3 class="card-title">Demais Parcelas</h3>
+                        <h3 class="card-title">Demais Parcelas  @dinheiro($infoPagina['parcelasPagas']) | @dinheiro($infoPagina['parcelasAVencer']) |  @dinheiro($infoPagina['parcelasTotais'])</h3>
                         </div>
                             <table class="table table-hover text-nowrap table-responsive">
                                 <thead>
@@ -256,7 +255,7 @@
                                             @endif
                                         <td><a class="btn btn-block btn-warning" href="{{ route('lancamento.edit', [$parcela->id])}}"> <i class="fa fa-edit"></i> Editar</a></td>
                                         <td>
-                                            <form action="{{ route('lancamento.excluir',  $parcela->id )}}" method="get">
+                                            <form action="{{ route('itemLancamento.excluir',  $parcela->id )}}" method="get">
                                                 @csrf
                                                 <button type="submit" class="btn btn-block btn-danger">Excluir</button>
                                             </form>

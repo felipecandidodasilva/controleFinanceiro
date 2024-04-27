@@ -30,4 +30,20 @@ class Item_lancamento extends Model
     {
         return $this->belongsTo(FormaPagamento::class);
     }
+
+    function valorTotalParcelas($lancamento_id) : float {
+
+        return $this->where('lancamento_id',$lancamento_id)->sum('valor');
+        
+    }
+    function valorTotalParcelasPagas($lancamento_id) : float {
+
+        return $this->where('lancamento_id',$lancamento_id)->where('pago','S')->sum('valor');
+        
+    }
+    function valorTotalParcelasAVencer($lancamento_id) : float {
+
+        return $this->where('lancamento_id',$lancamento_id)->where('pago','N')->sum('valor');
+        
+    }
 }

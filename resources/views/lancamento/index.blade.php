@@ -88,13 +88,13 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-8">
+        <div class="col-lg-8 col-md-12 col-xs-12 col-sm-12">
             <div class="card">
                 <div class="card-body">
                     <div class="card card-info">
                         <div class="card-header">
                             <h1 class="card-title">Lista de {{$infoPagina['titulo']}}:  
-                                @dinheiro($subTotal['vlrAPagar']) | @dinheiro($subTotal['vlrTotal'])
+                                  Pago @dinheiro($subTotal['vlrPago']) de @dinheiro($subTotal['vlrTotal']), restam @dinheiro($subTotal['vlrAPagar'])
                             </h1>
                             <div class="card-tools">
                                 <form action="{{ route('lancamentos.filtros',['tipo' => $infoPagina['tipoRota'] ] ) }}" method="get" class="row row-cols-lg-auto g-3 align-items-center">
@@ -140,9 +140,9 @@
                                         <td>{{$lancamento->parcela}}/{{$lancamento->total_parcelas}}</td>
                                         </td>
                                         @if ($lancamento->pago == 'S')
-                                                <td><a class="btn btn-block btn-secondary" href="{{ route('lancamento.baixar', ['id' => $lancamento->id,'pago' =>0])}}"> <i class="fa fa-hand-holding-dollar"> Retorno</a></td>
+                                                <td><a class="btn btn-block btn-secondary" href="{{ route('lancamento.baixar', ['id' => $lancamento->id,'pago' =>'N'])}}"> <i class="fa fa-hand-holding-dollar"> Retorno</a></td>
                                                 @else
-                                                <td><a class="btn btn-block btn-success" href="{{ route('lancamento.baixar', ['id' => $lancamento->id,'pago' =>1])}}"> <i class="fa fa-money"></i> Baixar</a></td>
+                                                <td><a class="btn btn-block btn-success" href="{{ route('lancamento.baixar', ['id' => $lancamento->id,'pago' =>'S'])}}"> <i class="fa fa-money"></i> Baixar</a></td>
                                             @endif
                                         <td><a class="btn btn-block btn-warning" href="{{ route('lancamento.edit', [$lancamento->id])}}"> <i class="fa fa-edit"></i> Editar</a></td>
                                         <td>
@@ -164,7 +164,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-lg-4 col-md-12 col-xs-12 col-sm-12">
             <div class="card">
                 <div class="card-body">
                     <div class="card card-info">
@@ -184,19 +184,19 @@
                                         <label for="inputDescricao" class="col-sm-12 col-form-label">Descrição</label>
                                         <input type="text" name="descricao" class="form-control" id="inputDescricao" placeholder="Descrição">
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-lg-4 col-md-12 col-xs-12 col-sm-12">
                                         <label for="input_dt_compra" class="col-sm-12 col-form-label">Data Compra</label>
                                         <input type="date" name="dt_compra" class="form-control" id="input_dt_compra" >
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-lg-4 col-md-12 col-xs-12 col-sm-12">
                                         <label for="input_valor" class="col-sm-12 col-form-label">Valor compra</label>
-                                        <input type="numeric" name="valor" class="form-control" id="input_valor" >
+                                        <input type="number" step=0.01 name="valor" class="form-control" id="input_valor" >
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-lg-4 col-md-12 col-xs-12 col-sm-12">
                                         <label for="input_total_parcelas" class="col-sm-12 col-form-label">Total parcelas</label>
-                                        <input type="numeric" name="total_parcelas" class="form-control" id="input_total_parcelas" >
+                                        <input type="number" step=0.01 name="total_parcelas" class="form-control" id="input_total_parcelas" >
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-lg-12 col-xl-6">
                                         <label class="col-sm-12 col-form-label">Sub grupo</label>
                                         <select name="subgrupo_id" class="form-control">
                                             @forelse ($subgrupos as $subgrupo )
@@ -209,7 +209,7 @@
                                             @endforelse
                                         </select>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-lg-12 col-xl-6">
                                         <label class="col-sm-12 col-form-label">Forma de pagamento</label>
                                         <select name="forma_pagamento_id" class="form-control">
                                             @forelse ($formaPagamentos as $formaPagamento )

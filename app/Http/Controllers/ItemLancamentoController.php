@@ -62,39 +62,56 @@ class ItemLancamentoController extends Controller
     public function adicionar(Lancamento $lancamento, Request $request, $id)
     {
 
+        if (empty($request->addVlrParc) || empty($request->addQtdParc)) {
+            return redirect()->back()->with('falha', 'Quantidade e valor devem ser preenchidos!!');
+        }
+
         $lancamento = $lancamento::find($id);
         $itens = Item_lancamento::where('lancamento_id',$id);
         $dtUltimaParc = $itens->max('dt_vencimento'); 
         $ultimaParcela = $itens->max('parcela');
-        // dd($dtUltimaParc,$ultimaParcela);
         // dd($request->all());
         $dt_vencimento = Datas::retornaPrimeiroVencimento($lancamento->forma_pagamento_id,$dtUltimaParc);
+        
+        
 
         // dd($dt_vencimento);
-
+        
         $totalParcelas = $ultimaParcela + $request->addQtdParc;
-
+        
+        // dd($request->addQtdParc,$ultimaParcela,$dt_vencimento,$totalParcelas);
 
         // Fazendo loop para adicionar parcelas
 
+        // echo "Última parcela: " . $ultimaParcela . "<br>";
+        // echo "Parcelas adicionadas: " . $request->addQtdParc . "<br>";
+        // echo "Total parcelas: " . $totalParcelas . "<br>";
         
-        for ($i=$request->addQtdParc; $i < $totalParcelas; $i++) { 
+        for ($i=$ultimaParcela; $i < $totalParcelas +1; $i++) { 
             
-            if($i > 0)
-                {
-                    $dt_vencimento = Datas::adicionaMes($dt_vencimento);
-                }
-                // echo $dt_vencimento . "<br>";
+            
+                $dt_vencimento = Datas::adicionaMes($dt_vencimento);
+                // echo $i . "<br>";
                 $item = Item_lancamento::create([
                    'lancamento_id' => $lancamento->id,
                    'forma_pagamento_id' => $lancamento->forma_pagamento_id,
                    'valor' => $request->addVlrParc,
                    'parcela' => $i,
                    'dt_vencimento' =>$dt_vencimento ,
-                   'pago' => false,
+                   'pago' => 'N',
                 ]);
+                
+            }
+            // dd("fim");
 
-        }
+        $itens = new Item_lancamento();
+        
+        // Atualizando o total do lançamento e o número de parcelas
+        $lancamento->valor = $itens->valorTotalParcelas($id);
+        $lancamento->total_parcelas = $i; // Veio do count do for
+        $lancamento->update();
+
+        return redirect()->back()->with('sucesso', 'Parcelas adicionadas com sucesso!!');
     }
 
     /**
@@ -107,13 +124,13 @@ class ItemLancamentoController extends Controller
         
         if ($registro->pago == 'S')
         {
-            return redirect()->route('lancamento.edit',[$id])->with('falha', 'Lançamento já pago!!');
+            return redirect()->back()->with('falha', 'Lançamento já pago!!');
 
         };
 
         $lancamento = Lancamento::find($registro->lancamento_id);
         $tipo = $lancamento->tipo_lancamento;
         $registro->delete();
-        return redirect()->route('lancamentos.index',[$tipo])->with('sucesso', 'Parcela excluída com sucesso!!');
+        return redirect()->back()->with('sucesso', 'Parcela excluída com sucesso!!');
     }
 }
