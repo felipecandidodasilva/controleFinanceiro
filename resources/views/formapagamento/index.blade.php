@@ -11,13 +11,14 @@
         <div class="alert alert-success">
             {{ session('sucesso')}}
         </div>
+    @endif
     @if((session('falha')))
         <div class="alert alert-danger">
             {{ session('falha')}}
         </div>
     @endif
     <div class="row">
-        <div class="col-6">
+        <div class="col-xs-12 col-lg-6">
             <div class="card">
                 <div class="card-body">
                     <div class="card card-info">
@@ -74,7 +75,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-xs-12 col-lg-6">
             <div class="card">
                 <div class="card-body">
                     <div class="card card-info">
@@ -88,15 +89,15 @@
                             <div class="card-body">
                                 <div class="row">
 
-                                    <div class="col-8">
+                                    <div class="col-xs-12 col-lg-8">
                                         <label for="inputDescricao" class="col-sm-12 col-form-label">Descrição</label>
                                         <input type="text" name="descricao" class="form-control" id="inputDescricao" placeholder="Descrição">
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-xs-12 col-lg-2">
                                         <label for="inputCompra" class="col-sm-12 col-form-label">Dia para Compra</label>
                                         <input type="number" name="diacompra" class="form-control" id="inputCompra" >
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-xs-12 col-lg-2">
                                         <label for="inputVencimento" class="col-sm-12 col-form-label">Vencimento</label>
                                         <input type="number" name="diavencimento" class="form-control" id="inputVencimento" >
                                     </div>
@@ -110,9 +111,9 @@
                             
                         </form>
                       
-</div>
-</div>
-</div>
-</div>
-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @stop
