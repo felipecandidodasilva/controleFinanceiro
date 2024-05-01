@@ -346,6 +346,11 @@ return [
                     'text' => 'Saídas',
                     'url' => '/lancamentos/saidas',
                     'icon' => 'fas fa-thumbs-down',
+                ],
+                [
+                    'text' => 'Saída Rapída',
+                    'url' => '/lancamentos/saida/rapida',
+                    'icon' => 'fas fa-comments-dollar',
                 ]
             ]
         ],
