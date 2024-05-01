@@ -20,6 +20,35 @@ class LancamentoController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function rapida()
+    {
+        
+        $tituloPagina = "Saída rápida";
+        $idSaidaRapida = subgrupos::select('id')->where('descricao', 'Saída Rápida')->get();
+        
+        
+        if (empty($idSaidaRapida['id']))
+        {
+            $idSaidaRapida = subgrupos::criaSaidaRapida(); 
+        } else {
+            $idSaidaRapida = $idSaidaRapida->id;
+        }
+
+        
+        $subgrupos = subgrupos::orderBy('descricao')->get();
+        $formaPagamentos = FormaPagamento::orderBy('descricao')->get();
+        
+        $infoPagina = [
+            'titulo'            => $tituloPagina,
+            'data'              => date('Y-m-d'),
+            'idSaidaRapida'     => $idSaidaRapida
+        ]; 
+        // dd($infoPagina);
+
+        
+        // dd($subgrupos);
+        return view('lancamento.saidaRapida',compact('infoPagina','subgrupos','formaPagamentos'));
+    }
     public function index(string $tipoRota, Request $request)
     {
         //   $lancamentos = Lancamento::all();
@@ -173,7 +202,8 @@ class LancamentoController extends Controller
 
         $tipoRota = $request->tipo_lancamento == 'E' ? 'entradas' : 'saidas';
 
-        return redirect()->route('lancamentos.index',['tipo' => $tipoRota])->with('sucesso', 'lançamento cadastrado com sucesso!!');
+        return redirect()->back()->with('sucesso', 'lançamento cadastrado com sucesso!!');
+        // return redirect()->route('lancamentos.index',['tipo' => $tipoRota])->with('sucesso', 'lançamento cadastrado com sucesso!!');
 
     }
     public function show(Lancamento $lancamento)

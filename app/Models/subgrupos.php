@@ -27,4 +27,13 @@ class subgrupos extends Model
         {
             return $this->hasMany(lancamento::class);
         }
+
+        public static function criaSaidaRapida() : int {
+            $subgrupo = subgrupos::create([
+                    'descricao' => 'Saída Rápida',
+                    'grupo_id'  => 1
+            ]);
+
+            return $subgrupo->id;
+        }
 }

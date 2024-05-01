@@ -22,24 +22,22 @@
             <div class="card"> 
                 <div class="card-body">
                     <div class="card card-info">
-                        <form action="{{ route('lancamentos.filtros',['tipo' => $infoPagina['tipoRota'] ] ) }}" method="get" class="row row-cols-lg-auto g-3 align-items-center">
+                        <form action="{{ route('lancamentos.filtros',['tipo' => $infoPagina['tipoRota'] ] ) }}" method="get" class="">
                             <div class="card-body table-responsive p-2">
-                                <div class="row">
+                                <div class="row" >
                                         @csrf
                                         <input type="hidden" value="{{$infoPagina['tipoLancamento']}}" name='tipo_lancamento'>
-                                        <div class="col-1">
-                                            <label class="col-sm-12 col-form-label"><Main>Data início</Main></label>
-                                            <div class="input group">
+                                            <div class="col-6 col-sm-1">
+                                                <label for="dt_ini"><Main>Data início</Main></label>
                                                 <input type="date" class="form-control" placeholder="Data início" aria-label="Data início" name="dt_ini" value="{{$filtros['dt_ini']}}">    
                                             </div>
-                                        </div>
-                                        <div class="col-1">
-                                            <label class="col-sm-12 col-form-label">Data fim</label>
-                                            <input type="date" class="form-control" placeholder="Data fim" aria-label="Data fim" name="dt_fim" value="{{$filtros['dt_fim']}}">
-                                        </div>
+                                            <div class="col-6 col-sm-1">
+                                                <label for="dt_fim">Data fim</label>
+                                                <input type="date" class="form-control" placeholder="Data fim" aria-label="Data fim" name="dt_fim" value="{{$filtros['dt_fim']}}">
+                                            </div>
                                         
-                                        <div class="col-4">
-                                            <label class="col-sm-12 col-form-label">Forma de pagamento</label>
+                                        <div class="col-xs-12 col-md-4">
+                                            <label class="">Forma de pagamento</label>
                                             <select name="forma_pagamento_id" class="form-control">
                                                 <option value="0">Todos</option>
                                                 @forelse ($formaPagamentos as $formaPagamento )
@@ -58,8 +56,8 @@
                                             
                                         </div>
                                         
-                                        <div class="col-4">
-                                            <label class="col-sm-12 col-form-label">Sub grupo</label>
+                                        <div class="col-xs-12 col-md-4">
+                                            <label class="">Sub grupo</label>
                                             <select name="subgrupo_id" class="form-control">
                                                 <option value="0">Todos</option>
                                                 @forelse ($subgrupos as $subgrupo )
@@ -67,17 +65,19 @@
                                                 <option value="{{ $subgrupo->id}}"
                                                     @if ($filtros['subgrupo_id'] && $filtros['subgrupo_id'] == $subgrupo->id)
                                                     selected
-                                                @endif
+                                                    @endif
                                                     >{{ $subgrupo->descricao}}</option>
-                                                
-                                                @empty
-                                                <p>Sem registros</p>
-                                                
-                                                @endforelse
-                                            </select>
-                                        </div>
-                                        <div class="col-2 ">
-                                            <button type="submit" class="btn btn-info">Filtrar</button>
+                                                    
+                                                    @empty
+                                                    <p>Sem registros</p>
+                                                    
+                                                    @endforelse
+                                                </select>
+                                            </div>
+                                            
+                                            <div class="col-xs-12 col-md-2" style="text-align: bottom;">
+                                            <label class="">.</label>
+                                            <button type="submit" class="btn btn-info form-control">Filtrar</button>
                                         </div>
                                 </div>
                             </div>
@@ -93,24 +93,24 @@
                 <div class="card-body">
                     <div class="card card-info">
                         <div class="card-header">
-                            <h1 class="card-title">Lista de {{$infoPagina['titulo']}}:  
-                                  Pago @dinheiro($subTotal['vlrPago']) de @dinheiro($subTotal['vlrTotal']), restam @dinheiro($subTotal['vlrAPagar'])
+                            <h1 class="card-title ">Lista de {{$infoPagina['titulo']}}:   Total:  @dinheiro($subTotal['vlrAPagar']) <br>
+                                  Pago @dinheiro($subTotal['vlrPago']) de @dinheiro($subTotal['vlrTotal']), 
                             </h1>
                             <div class="card-tools">
-                                <form action="{{ route('lancamentos.filtros',['tipo' => $infoPagina['tipoRota'] ] ) }}" method="get" class="row row-cols-lg-auto g-3 align-items-center">
-                                <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="hidden" value="{{$infoPagina['tipoLancamento']}}" name='tipo_lancamento'>
-                                    <input type="hidden" value="{{$filtros['subgrupo_id']}}" name='subgrupo_id'>
-                                    <input type="hidden" value="{{$filtros['forma_pagamento_id']}}" name='forma_pagamento_id'>
-                                    <input type="hidden" value="{{$filtros['dt_ini']}}" name='dt_ini'>
-                                    <input type="hidden" value="{{$filtros['dt_fim']}}" name='dt_fim'>
-                                    <input type="text" class="form-control float-right" placeholder="Search" name="lancamento" value="{{$filtros['lancamento']}}">
-                                    <div class="input-group-append">
-                                        <button type="submit" class="btn btn-default">
-                                            <i class="fas fa-search"></i>
-                                        </button>
+                                <form action="{{ route('lancamentos.filtros',['tipo' => $infoPagina['tipoRota'] ] ) }}" method="get" class="row row-cols-lg-auto g-3 align-items-center mt-2">
+                                    <div class="input-group input-group-sm" style="width: 150px;">
+                                        <input type="hidden" value="{{$infoPagina['tipoLancamento']}}" name='tipo_lancamento'>
+                                        <input type="hidden" value="{{$filtros['subgrupo_id']}}" name='subgrupo_id'>
+                                        <input type="hidden" value="{{$filtros['forma_pagamento_id']}}" name='forma_pagamento_id'>
+                                        <input type="hidden" value="{{$filtros['dt_ini']}}" name='dt_ini'>
+                                        <input type="hidden" value="{{$filtros['dt_fim']}}" name='dt_fim'>
+                                        <input type="text" class="form-control float-right" placeholder="Search" name="lancamento" value="{{$filtros['lancamento']}}">
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-default">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
                                 </form>
                             </div>
                         </div>

@@ -45,6 +45,7 @@ Route::get('/lancamento/excluir/{id}', [App\Http\Controllers\LancamentoControlle
 Route::get('/lancamento/gerar/{id}', [App\Http\Controllers\LancamentoController::class, 'gerar'])->name('lancamento.gerar');
 Route::get('/lancamento/baixar/{id}/{pago}', [App\Http\Controllers\LancamentoController::class, 'baixar'])->name('lancamento.baixar');
 
+Route::get('/lancamentos/saida/rapida', [App\Http\Controllers\LancamentoController::class, 'rapida'])->name('lancamentos.rapida');
 
 Route::get('/itemLancamento/excluir/{id}', [App\Http\Controllers\ItemLancamentoController::class, 'destroy'])->name('itemLancamento.excluir');
 Route::put('/itemLancamento/editar/{id}', [App\Http\Controllers\ItemLancamentoController::class, 'update'])->name('itemLancamento.update');
