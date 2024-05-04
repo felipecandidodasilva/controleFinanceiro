@@ -13,21 +13,20 @@
             {{ session('falha')}}
         </div>
     @endif
+    <div id='post-container'></div>
   
 @stop
 
 @section('content')
     <div class="row">
-        <div class="col-lg-4 col-md-12 col-xs-12 col-sm-12">
+        <div class="col-12 col-xl-6">
             <div class="card">
                 <div class="card-body">
                     <div class="card card-info">
                         <div class="card-header">
-                        <h3 class="card-title">Nova {{$infoPagina['titulo']}}</h3>
+                            <h3 class="card-title">Nova {{$infoPagina['titulo']}}</h3>
                         </div>
-
-
-                        <form class="form-horizontal" action="{{ route('lancamento.store')}}" method="POST">
+                        <form class="form-horizontal" action="{{ route('lancamento.store')}}" method="POST" id='formSaidaRapida'>
                             @csrf
                             <div class="card-body">
                                 <div class="row">
@@ -36,16 +35,20 @@
                                         <label for="inputDescricao" class="col-sm-12 col-form-label">Descrição</label>
                                         <input type="text" name="descricao" class="form-control" id="inputDescricao" placeholder="Descrição">
                                     </div>
-                                    <div class="col-lg-4 col-md-12 col-xs-12 col-sm-12">
+                                    <div class="col-12 col-xl-6">
                                         <label for="input_valor" class="col-sm-12 col-form-label">Valor compra</label>
                                         <input type="number" step=0.01 name="valor" class="form-control" id="input_valor" >
                                     </div>
-                                    <div class="col-lg-12 col-xl-6">
+                                    <div class="col-12 col-xl-6">
                                         <label class="col-sm-12 col-form-label">Forma de pagamento</label>
                                         <select name="forma_pagamento_id" class="form-control">
                                             @forelse ($formaPagamentos as $formaPagamento )
                                             
-                                            <option value="{{ $formaPagamento->id}}">{{ $formaPagamento->descricao}}</option>
+                                            <option value="{{ $formaPagamento->id}}"
+                                                @if ($infoPagina['forma_pagamento_id'] == $formaPagamento->id )
+                                                    selected
+                                                @endif
+                                                >{{ $formaPagamento->descricao}}</option>
                                             
                                             @empty
                                             <p>Sem registros</p>
@@ -53,7 +56,7 @@
                                             @endforelse
                                         </select>
                                     </div>
-                                    <div class="col-lg-12 col-xl-6">
+                                    <div class="col-12 col-xl-6">
                                         <label class="col-sm-12 col-form-label">Sub grupo</label>
                                         <select name="subgrupo_id" class="form-control">
                                             @forelse ($subgrupos as $subgrupo )
@@ -72,12 +75,12 @@
                                             @endforelse
                                         </select>
                                     </div>
-                                  
-                                    <div class="col-6 col-lg-4 col-md-12 col-xs-12 col-sm-12">
+                                    
+                                    <div class="col-12 col-xl-6">
                                         <label for="input_dt_compra" class="col-sm-12 col-form-label">Data Compra</label>
                                         <input type="date" name="dt_compra" class="form-control" id="input_dt_compra" value="{{$infoPagina['data']}}" >
                                     </div>
-                                    <div class="col-6 col-lg-4 col-md-12 col-xs-12 col-sm-12">
+                                    <div class="col-3">
                                         <label for="input_total_parcelas" class="col-sm-12 col-form-label">Total parcelas</label>
                                         <input type="number" step=0.01 name="total_parcelas" class="form-control" id="input_total_parcelas" value='1' >
                                     </div>
@@ -95,11 +98,12 @@
                             </div>
                             
                         </form>
-                    
                     </div>
                 </div>
             </div>
         </div>
   
     </div>
+
+    <script src="{{asset('js/app.js')}}"> </script>
 @stop

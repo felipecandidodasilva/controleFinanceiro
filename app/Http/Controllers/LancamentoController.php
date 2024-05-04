@@ -22,16 +22,31 @@ class LancamentoController extends Controller
      */
     public function rapida()
     {
+        $formData = session()->get('formData');
+        session()->forget('formData');
+        // dd($formData);
         
         $tituloPagina = "Saída rápida";
-        $idSaidaRapida = subgrupos::select('id')->where('descricao', 'Saída Rápida')->get();
-        
-        
-        if (empty($idSaidaRapida['id']))
-        {
-            $idSaidaRapida = subgrupos::criaSaidaRapida(); 
+
+        if (!empty($formData)) {
+            $data = $formData['dt_compra'];
+            $forma_pagamento_id = $formData['forma_pagamento_id'];
+            $descricao = $formData['descricao'];
+            $idSaidaRapida = $formData['subgrupo_id'];
         } else {
-            $idSaidaRapida = $idSaidaRapida->id;
+            $data = date('Y-m-d');
+            $forma_pagamento_id = 0;
+            $descricao = '';
+            $idSaidaRapida = subgrupos::select('id')->where('descricao', 'Saída Rápida')->first();
+            
+            // dd($idSaidaRapida->id);
+
+            if (empty($idSaidaRapida->id))
+            {
+                $idSaidaRapida = subgrupos::criaSaidaRapida(); 
+            } else {
+                $idSaidaRapida = $idSaidaRapida->id;
+            }
         }
 
         
@@ -40,14 +55,16 @@ class LancamentoController extends Controller
         
         $infoPagina = [
             'titulo'            => $tituloPagina,
-            'data'              => date('Y-m-d'),
-            'idSaidaRapida'     => $idSaidaRapida
+            'data'              => $data,
+            'idSaidaRapida'     => $idSaidaRapida,
+            'forma_pagamento_id'  => $forma_pagamento_id,
+            'descricao'  => $descricao
         ]; 
         // dd($infoPagina);
 
         
         // dd($subgrupos);
-        return view('lancamento.saidaRapida',compact('infoPagina','subgrupos','formaPagamentos'));
+        return view('lancamento.saidaRapida',compact('infoPagina','subgrupos','formaPagamentos','formData'));
     }
     public function index(string $tipoRota, Request $request)
     {
@@ -195,6 +212,8 @@ class LancamentoController extends Controller
         // $request->validate([
         //     'descricao' =>'required'
         // ]);
+
+        session()->put('formData', $request->all());
 
         $lancamento = Lancamento::create($request->all());
 
