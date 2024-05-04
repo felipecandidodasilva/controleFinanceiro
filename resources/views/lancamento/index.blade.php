@@ -27,16 +27,16 @@
                                 <div class="row" >
                                         @csrf
                                         <input type="hidden" value="{{$infoPagina['tipoLancamento']}}" name='tipo_lancamento'>
-                                            <div class="col-6 col-sm-1">
+                                            <div class="col-md-6 col-xl-1">
                                                 <label for="dt_ini"><Main>Data início</Main></label>
                                                 <input type="date" class="form-control" placeholder="Data início" aria-label="Data início" name="dt_ini" value="{{$filtros['dt_ini']}}">    
                                             </div>
-                                            <div class="col-6 col-sm-1">
+                                            <div class="col-md-6 col-xl-1">
                                                 <label for="dt_fim">Data fim</label>
                                                 <input type="date" class="form-control" placeholder="Data fim" aria-label="Data fim" name="dt_fim" value="{{$filtros['dt_fim']}}">
                                             </div>
                                         
-                                        <div class="col-xs-12 col-md-4">
+                                        <div class="col-md-5 col-xl-4">
                                             <label class="">Forma de pagamento</label>
                                             <select name="forma_pagamento_id" class="form-control">
                                                 <option value="0">Todos</option>
@@ -56,7 +56,7 @@
                                             
                                         </div>
                                         
-                                        <div class="col-xs-12 col-md-4">
+                                        <div class="col-md-5 col-xl-4">
                                             <label class="">Sub grupo</label>
                                             <select name="subgrupo_id" class="form-control">
                                                 <option value="0">Todos</option>
@@ -75,7 +75,7 @@
                                                 </select>
                                             </div>
                                             
-                                            <div class="col-xs-12 col-md-2" style="text-align: bottom;">
+                                            <div class="col-2 col-md-2">
                                             <label class="">.</label>
                                             <button type="submit" class="btn btn-info form-control">Filtrar</button>
                                         </div>
@@ -88,7 +88,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-8 col-md-12 col-xs-12 col-sm-12">
+        <div class="col-xl-8 col-md-12">
             <div class="card">
                 <div class="card-body">
                     <div class="card card-info">
@@ -164,7 +164,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-12 col-xs-12 col-sm-12">
+        <div class="col-xl-4 col-md-8">
             <div class="card">
                 <div class="card-body">
                     <div class="card card-info">
@@ -184,15 +184,15 @@
                                         <label for="inputDescricao" class="col-sm-12 col-form-label">Descrição</label>
                                         <input type="text" name="descricao" class="form-control" id="inputDescricao" placeholder="Descrição">
                                     </div>
-                                    <div class="col-lg-4 col-md-12 col-xs-12 col-sm-12">
+                                    <div class="col-lg-4 col-md-12">
                                         <label for="input_dt_compra" class="col-sm-12 col-form-label">Data Compra</label>
                                         <input type="date" name="dt_compra" class="form-control" id="input_dt_compra" >
                                     </div>
-                                    <div class="col-lg-4 col-md-12 col-xs-12 col-sm-12">
+                                    <div class="col-lg-4 col-md-12">
                                         <label for="input_valor" class="col-sm-12 col-form-label">Valor compra</label>
                                         <input type="number" step=0.01 name="valor" class="form-control" id="input_valor" >
                                     </div>
-                                    <div class="col-lg-4 col-md-12 col-xs-12 col-sm-12">
+                                    <div class="col-lg-4 col-md-12">
                                         <label for="input_total_parcelas" class="col-sm-12 col-form-label">Total parcelas</label>
                                         <input type="number" step=0.01 name="total_parcelas" class="form-control" id="input_total_parcelas" >
                                     </div>
@@ -210,7 +210,7 @@
                                         </select>
                                     </div>
                                     <div class="col-lg-12 col-xl-6">
-                                        <label class="col-sm-12 col-form-label">Forma de pagamento</label>
+                                        <label class="col-sm-12 col-form-label">Forma Pgto.</label>
                                         <select name="forma_pagamento_id" class="form-control">
                                             @forelse ($formaPagamentos as $formaPagamento )
                                             
