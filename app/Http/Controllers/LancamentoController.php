@@ -146,6 +146,7 @@ class LancamentoController extends Controller
         $lancamentos = $lancamentos
         ->orderBy('item_lancamentos.pago')
         ->orderBy('dt_vencimento')
+        ->orderBy('dt_compra')
         ->orderBy('item_lancamentos.created_at')
         ->get();
         

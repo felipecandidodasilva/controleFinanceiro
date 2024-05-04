@@ -120,6 +120,7 @@
                         <thead>
                             <tr>
                                 <th>Vencimento</th>
+                                <th>Compra</th>
                                 <th>Descrição</th>
                                 <th>Valor Total</th>
                                 <th>Parcela</th>
@@ -133,6 +134,7 @@
                                     @forelse($lancamentos as $lancamento)
                                         <tr>
                                         <td>@dataBr($lancamento->dt_vencimento)</td>
+                                        <td>@dataBr($lancamento->dt_compra)</td>
                                         <td>{{$lancamento->lancamento}}</td>
                                         <td>@dinheiro($lancamento->valor)</td>
                                         <td>{{$lancamento->parcela}}/{{$lancamento->total_parcelas}}</td>
