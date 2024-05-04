@@ -116,7 +116,7 @@
                         </div>
 
                         <div class="card-body table-responsive p-0">
-                        <table class="table table-hover text-nowrap">
+                        <table class="table table-hover table-sm  text-truncate">
                         <thead>
                             <tr>
                                 <th>Data Vencimento</th>
@@ -250,6 +250,5 @@
                 </div>
             </div>
         </div>
-  
     </div>
 @stop
