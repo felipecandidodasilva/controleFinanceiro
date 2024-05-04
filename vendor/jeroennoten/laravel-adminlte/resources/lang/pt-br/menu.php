@@ -4,7 +4,7 @@ return [
 
     'main_navigation' => 'Navegação Principal',
     'blog' => 'Blog',
-    'pages' => 'Página',
+    'pages' => 'Página XXX',
     'account_settings' => 'Configurações da Conta',
     'profile' => 'Perfil',
     'change_password' => 'Mudar Senha',
@@ -13,7 +13,7 @@ return [
     'level_two' => 'Nível 2',
     'level_three' => 'Nível 3',
     'labels' => 'Etiquetas',
-    'Important' => 'Importante',
+    'Important' => 'Importante demais!',
     'Warning' => 'Aviso',
     'Information' => 'Informação',
 ];

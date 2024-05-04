@@ -68,6 +68,21 @@ class LancamentoController extends Controller
     }
     public function index(string $tipoRota, Request $request)
     {
+        // Buscando dados da ultima inserção para manter preenchido o que importa
+        $formData = session()->get('formData');
+        session()->forget('formData');
+
+
+        if (!empty($formData)) {
+            $data = $formData['dt_compra'];
+            $forma_pagamento_id = $formData['forma_pagamento_id'];
+            $subgrupo_id = $formData['subgrupo_id'];
+        } else {
+            $data = date('Y-m-d');
+            $forma_pagamento_id = 0;
+            $subgrupo_id = 1;
+        }
+
         //   $lancamentos = Lancamento::all();
         $tipo = $tipoRota == 'entradas' ? 'E' : 'S';
         $tipo = $request->tipo_lancamento ? $request->tipo_lancamento : $tipo; 
@@ -118,37 +133,40 @@ class LancamentoController extends Controller
                 $lancamentos->where('lancamentos.descricao', 'like', '%' . $request->lancamento . '%');
             }
             
-            // FILTROS 
-            
-            $vlrTotal = $lancamentos->clone()->whereBetween('dt_vencimento',[$filtroDtIni, $filtroDtFim])->sum('item_lancamentos.valor');
-            $vlrPago = $lancamentos->clone()->whereBetween('dt_vencimento',[$filtroDtIni, $filtroDtFim])->where('pago','S')->sum('item_lancamentos.valor');
-            $vlrAPagar = $lancamentos->clone()->whereBetween('dt_vencimento',[$filtroDtIni, $filtroDtFim])->where('pago','N')->sum('item_lancamentos.valor');
-            
-            // dd($subTotal);
-            
-            // dd($vlrPago,$vlrAPagar,$vlrTotal);
-            
-            $lancamentos = $lancamentos
-            ->orderBy('item_lancamentos.pago')
-            ->orderBy('dt_vencimento')
-            ->orderBy('item_lancamentos.created_at')
-            ->get();
-            
-            $subTotal = [
-               'vlrTotal' => $vlrTotal,
-               'vlrPago' => $vlrPago,
-               'vlrAPagar' => $vlrAPagar
-            ];
-            
-            $infoPagina = [
-                'titulo' => $tituloPagina,
-                'tipoLancamento' => $tipo,
-                'tipoRota' => $tipoRota
-            ]; 
-            
-            $filtros = [
-                'dt_ini' => $filtroDtIni,
-                'dt_fim' => $filtroDtFim,
+        // FILTROS 
+        
+        $vlrTotal = $lancamentos->clone()->whereBetween('dt_vencimento',[$filtroDtIni, $filtroDtFim])->sum('item_lancamentos.valor');
+        $vlrPago = $lancamentos->clone()->whereBetween('dt_vencimento',[$filtroDtIni, $filtroDtFim])->where('pago','S')->sum('item_lancamentos.valor');
+        $vlrAPagar = $lancamentos->clone()->whereBetween('dt_vencimento',[$filtroDtIni, $filtroDtFim])->where('pago','N')->sum('item_lancamentos.valor');
+        
+        // dd($subTotal);
+        
+        // dd($vlrPago,$vlrAPagar,$vlrTotal);
+        
+        $lancamentos = $lancamentos
+        ->orderBy('item_lancamentos.pago')
+        ->orderBy('dt_vencimento')
+        ->orderBy('item_lancamentos.created_at')
+        ->get();
+        
+        $subTotal = [
+            'vlrTotal' => $vlrTotal,
+            'vlrPago' => $vlrPago,
+            'vlrAPagar' => $vlrAPagar
+        ];
+        
+        $infoPagina = [
+            'titulo' => $tituloPagina,
+            'tipoLancamento' => $tipo,
+            'tipoRota' => $tipoRota,
+            'data'              => $data,
+            'subgrupo_id'     => $subgrupo_id,
+            'forma_pagamento_id'  => $forma_pagamento_id,
+        ]; 
+        
+        $filtros = [
+            'dt_ini' => $filtroDtIni,
+            'dt_fim' => $filtroDtFim,
             'lancamento' => $filtroLancamento,
             'forma_pagamento_id' => $request->forma_pagamento_id,
             'subgrupo_id' =>$request->subgrupo_id,

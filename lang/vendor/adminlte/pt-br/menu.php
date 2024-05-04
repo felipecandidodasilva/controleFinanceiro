@@ -4,7 +4,7 @@ return [
 
     'main_navigation' => 'Navegação Principal',
     'blog' => 'Blog',
-    'pages' => 'Página',
+    'pages' => 'Página XX',
     'account_settings' => 'Configurações da Conta',
     'profile' => 'Perfil',
     'change_password' => 'Mudar Senha',

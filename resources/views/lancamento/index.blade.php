@@ -186,7 +186,7 @@
                                     </div>
                                     <div class="col-lg-4 col-md-12">
                                         <label for="input_dt_compra" class="col-sm-12 col-form-label">Data Compra</label>
-                                        <input type="date" name="dt_compra" class="form-control" id="input_dt_compra" >
+                                        <input type="date" name="dt_compra" class="form-control" id="input_dt_compra"  value="{{$infoPagina['data']}}">
                                     </div>
                                     <div class="col-lg-4 col-md-12">
                                         <label for="input_valor" class="col-sm-12 col-form-label">Valor compra</label>
@@ -194,14 +194,20 @@
                                     </div>
                                     <div class="col-lg-4 col-md-12">
                                         <label for="input_total_parcelas" class="col-sm-12 col-form-label">Total parcelas</label>
-                                        <input type="number" step=0.01 name="total_parcelas" class="form-control" id="input_total_parcelas" >
+                                        <input type="number" step=0.01 name="total_parcelas" class="form-control" id="input_total_parcelas" value='1'>
                                     </div>
                                     <div class="col-lg-12 col-xl-6">
                                         <label class="col-sm-12 col-form-label">Sub grupo</label>
                                         <select name="subgrupo_id" class="form-control">
                                             @forelse ($subgrupos as $subgrupo )
                                                 
-                                                <option value="{{ $subgrupo->id}}">{{ $subgrupo->descricao}}</option>
+                                                <option value="{{ $subgrupo->id}}"
+                                                    @if ($infoPagina['subgrupo_id'] == $subgrupo->id )
+                                                        selected
+                                                    @endif>
+                                                    
+                                                    {{ $subgrupo->descricao}}
+                                                </option>
                                                 
                                                 @empty
                                                 <p>Sem registros</p>
@@ -214,7 +220,10 @@
                                         <select name="forma_pagamento_id" class="form-control">
                                             @forelse ($formaPagamentos as $formaPagamento )
                                             
-                                            <option value="{{ $formaPagamento->id}}">{{ $formaPagamento->descricao}}</option>
+                                            <option value="{{ $formaPagamento->id}}" 
+                                                @if ($infoPagina['forma_pagamento_id'] == $formaPagamento->id ) selected @endif>
+                                                
+                                                {{ $formaPagamento->descricao}}</option>
                                             
                                             @empty
                                             <p>Sem registros</p>
