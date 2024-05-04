@@ -119,12 +119,12 @@
                         <table class="table table-hover table-sm  text-truncate">
                         <thead>
                             <tr>
-                                <th>Data Vencimento</th>
-                                <th>Subgrupo</th>
+                                <th>Vencimento</th>
                                 <th>Descrição</th>
                                 <th>Valor Total</th>
-                                <th>Forma Pagamento</th>
                                 <th>Parcela</th>
+                                <th>Subgrupo</th>
+                                <th>Forma Pagamento</th>
                                 <th>#</th>
                                 <th>#</th>
                             </tr>
@@ -133,11 +133,11 @@
                                     @forelse($lancamentos as $lancamento)
                                         <tr>
                                         <td>@dataBr($lancamento->dt_vencimento)</td>
-                                        <td>{{$lancamento->subgrupo}}</td>
                                         <td>{{$lancamento->lancamento}}</td>
                                         <td>@dinheiro($lancamento->valor)</td>
-                                        <td>{{$lancamento->formaPagamento}}</td>
                                         <td>{{$lancamento->parcela}}/{{$lancamento->total_parcelas}}</td>
+                                        <td>{{$lancamento->subgrupo}}</td>
+                                        <td>{{$lancamento->formaPagamento}}</td>
                                         </td>
                                         @if ($lancamento->pago == 'S')
                                                 <td><a class="btn btn-block btn-secondary" href="{{ route('lancamento.baixar', ['id' => $lancamento->id,'pago' =>'N'])}}"> <i class="fa fa-hand-holding-dollar"> Retorno</a></td>
