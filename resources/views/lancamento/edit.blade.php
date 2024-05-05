@@ -23,7 +23,7 @@
                 <div class="card-body">
                     <div class="card card-info">
                         <div class="card-header">
-                            <h3 class="card-title">Editar parcela {{$lancamento->descricao}}</h3>
+                            <h3 class="card-title">Editar parcela ({{$itemLancamento->id}}) {{$lancamento->descricao}}</h3>
                         </div>
 
                         <div class="card-body table-responsive p-0">
@@ -249,9 +249,9 @@
                                         </td>
                                         </td>
                                         @if ($parcela->pago == 'S')
-                                                <td><a class="btn btn-block btn-success" href="{{ route('lancamento.baixar', ['id' => $parcela->id,'pago' =>0])}}"> <i class="fa fa-edit"></i> Retorno</a></td>
+                                                <td><a class="btn btn-block btn-success" href="{{ route('lancamento.baixar', ['id' => $parcela->id,'pago' =>'N'])}}"> <i class="fa fa-edit"></i> Retorno</a></td>
                                                 @else
-                                                <td><a class="btn btn-block btn-secondary" href="{{ route('lancamento.baixar', ['id' => $parcela->id,'pago' =>1])}}"> <i class="fa fa-edit"></i> Baixar</a></td>
+                                                <td><a class="btn btn-block btn-secondary" href="{{ route('lancamento.baixar', ['id' => $parcela->id,'pago' =>'S'])}}"> <i class="fa fa-edit"></i> Baixar</a></td>
                                             @endif
                                         <td><a class="btn btn-block btn-warning" href="{{ route('lancamento.edit', [$parcela->id])}}"> <i class="fa fa-edit"></i> Editar</a></td>
                                         <td>

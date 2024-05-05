@@ -46,4 +46,7 @@ class Item_lancamento extends Model
         return $this->where('lancamento_id',$lancamento_id)->where('pago','N')->sum('valor');
         
     }
+    public static function totalParcelas($lancamentoi_id): int {
+        return Item_lancamento::where('lancamento_id',$lancamentoi_id)->count();
+    }
 }

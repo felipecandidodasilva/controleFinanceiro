@@ -148,7 +148,7 @@
                                             @endif
                                         <td><a class="btn btn-block btn-warning" href="{{ route('lancamento.edit', [$lancamento->id])}}"> <i class="fa fa-edit"></i> Editar</a></td>
                                         <td>
-                                            <form action="{{ route('lancamento.excluir',  $lancamento->id )}}" method="get">
+                                            <form action="{{ route('itemLancamento.excluir',  $lancamento->id )}}" method="get">
                                                 @csrf
                                                 <button type="submit" class="btn btn-block btn-danger">Excluir</button>
                                             </form>

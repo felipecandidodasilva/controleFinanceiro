@@ -121,6 +121,7 @@ class ItemLancamentoController extends Controller
     {
 
         $registro = Item_lancamento::find($id);
+        $lancamento_id = $registro->lancamento_id;
         
         if ($registro->pago == 'S')
         {
@@ -128,9 +129,25 @@ class ItemLancamentoController extends Controller
 
         };
 
-        $lancamento = Lancamento::find($registro->lancamento_id);
-        $tipo = $lancamento->tipo_lancamento;
+        $lancamento = Lancamento::find($lancamento_id);
+        $tipoLancamento = $lancamento->tipo_lancamento;
+        
+        // $totalParcelas = Item_lancamento::totalParcelas($lancamento_id);
+        $totalParcelas = $lancamento->item_lancamento->count();
+        // dd($totalParcelas);
+        
         $registro->delete();
-        return redirect()->back()->with('sucesso', 'Parcela excluída com sucesso!!');
+        
+        //Deletando o lançamento se houver somente um registro
+        if ($totalParcelas == 1 ) {
+            $lancamento->delete();
+        } else {
+            $lancamento = Lancamento::find($lancamento_id);
+            // dd($lancamento->item_lancamento->count());
+            $lancamento->redefinirTotalParcelas();
+            $lancamento->redefinirValorTotal();
+        }
+        return redirect()->route('lancamentos.index',[$tipoLancamento])->with('sucesso', 'lançamento excluído com sucesso!!');
+        // return redirect()->back()->with('sucesso', 'Parcela excluída com sucesso!!');
     }
 }

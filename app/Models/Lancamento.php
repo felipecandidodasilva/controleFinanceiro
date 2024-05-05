@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+
 class Lancamento extends Model
 {
     use HasFactory;
@@ -33,5 +34,15 @@ class Lancamento extends Model
     public function item_lancamento(): HasMany
     {
         return $this->hasMany(Item_lancamento::class);
+    }
+    public function redefinirTotalParcelas() {
+        $this->total_parcelas =  $this->item_lancamento->count();
+        // dd($this->total_parcelas);
+        return $this->update();
+    }
+    public function redefinirValorTotal() {
+        $this->valor =  $this->item_lancamento->sum('valor');
+        // dd($this->total_parcelas);
+        return $this->update();
     }
 }
