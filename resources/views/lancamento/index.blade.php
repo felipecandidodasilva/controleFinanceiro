@@ -116,7 +116,7 @@
                         </div>
 
                         <div class="card-body table-responsive p-0">
-                        <table class="table table-hover table-sm  text-truncate">
+                        <table class="table table-hover table-sm  text-truncate datatables">
                         <thead>
                             <tr>
                                 <th>Vencimento</th>
@@ -128,32 +128,33 @@
                                 <th>Forma Pagamento</th>
                                 <th>#</th>
                                 <th>#</th>
+                                <th>#</th>
                             </tr>
                             </thead>
                                 <tbody>
                                     @forelse($lancamentos as $lancamento)
                                         <tr>
-                                        <td>@dataBr($lancamento->dt_vencimento)</td>
-                                        <td>@dataBr($lancamento->dt_compra)</td>
-                                        <td>{{$lancamento->lancamento}}</td>
-                                        <td>@dinheiro($lancamento->valor)</td>
-                                        <td>{{$lancamento->parcela}}/{{$lancamento->total_parcelas}}</td>
-                                        <td>{{$lancamento->subgrupo}}</td>
-                                        <td>{{$lancamento->formaPagamento}}</td>
-                                        </td>
-                                        @if ($lancamento->pago == 'S')
-                                                <td><a class="btn btn-block btn-secondary" href="{{ route('lancamento.baixar', ['id' => $lancamento->id,'pago' =>'N'])}}"> <i class="fa fa-hand-holding-dollar"> Retorno</a></td>
-                                                @else
-                                                <td><a class="btn btn-block btn-success" href="{{ route('lancamento.baixar', ['id' => $lancamento->id,'pago' =>'S'])}}"> <i class="fa fa-money"></i> Baixar</a></td>
-                                            @endif
-                                        <td><a class="btn btn-block btn-warning" href="{{ route('lancamento.edit', [$lancamento->id])}}"> <i class="fa fa-edit"></i> Editar</a></td>
-                                        <td>
-                                            <form action="{{ route('itemLancamento.excluir',  $lancamento->id )}}" method="get">
-                                                @csrf
-                                                <button type="submit" class="btn btn-block btn-danger">Excluir</button>
-                                            </form>
-                                        </td>
-                                        {{-- <td><a class="btn btn-block btn-warning" href="{{ route('lancamento.gerar', [$lancamento->id])}}"> <i class="fa fa-edit"></i> Gerar</a></td> --}}
+                                            <td>@dataBr($lancamento->dt_vencimento)</td>
+                                            <td>@dataBr($lancamento->dt_compra)</td>
+                                            <td>{{$lancamento->lancamento}}</td>
+                                            <td>@dinheiro($lancamento->valor)</td>
+                                            <td>{{$lancamento->parcela}}/{{$lancamento->total_parcelas}}</td>
+                                            <td>{{$lancamento->subgrupo}}</td>
+                                            <td>{{$lancamento->formaPagamento}}</td>
+                                            </td>
+                                            @if ($lancamento->pago == 'S')
+                                                    <td><a class="btn btn-block btn-secondary" href="{{ route('lancamento.baixar', ['id' => $lancamento->id,'pago' =>'N'])}}"> <i class="fa fa-hand-holding-dollar"> Retorno</a></td>
+                                                    @else
+                                                    <td><a class="btn btn-block btn-success" href="{{ route('lancamento.baixar', ['id' => $lancamento->id,'pago' =>'S'])}}"> <i class="fa fa-money"></i> Baixar</a></td>
+                                                @endif
+                                            <td><a class="btn btn-block btn-warning" href="{{ route('lancamento.edit', [$lancamento->id])}}"> <i class="fa fa-edit"></i> Editar</a></td>
+                                            <td>
+                                                <form action="{{ route('itemLancamento.excluir',  $lancamento->id )}}" method="get">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-block btn-danger">Excluir</button>
+                                                </form>
+                                            </td>
+                                            {{-- <td><a class="btn btn-block btn-warning" href="{{ route('lancamento.gerar', [$lancamento->id])}}"> <i class="fa fa-edit"></i> Gerar</a></td> --}}
                                         </tr>
                                         @empty
                                         <p>Sem dados cadastrados</p>

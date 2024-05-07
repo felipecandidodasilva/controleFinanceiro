@@ -19,6 +19,8 @@
         @yield('title_postfix', config('adminlte.title_postfix', ''))
     </title>
 
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.6/css/dataTables.dataTables.css" />
+
     {{-- Custom stylesheets (pre AdminLTE) --}}
     @yield('adminlte_css_pre')
 
@@ -104,6 +106,19 @@
 
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
+
+
+    <script src="https://cdn.datatables.net/2.0.6/js/dataTables.js"></script>
+    <script>
+        $(document).ready( function () {
+        $('.datatables').DataTable({
+            paging: false,
+            language: {
+                        url: '//cdn.datatables.net/plug-ins/2.0.6/i18n/pt-BR.json',
+                    },
+        });
+    } );
+    </script>
 
 </body>
 
