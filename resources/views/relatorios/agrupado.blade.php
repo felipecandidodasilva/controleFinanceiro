@@ -9,7 +9,7 @@
 @section('content')
 @include('forms.filtros')
     <div class="row">
-        <div class="col-xl-8 col-md-12">
+        <div class="col-3">
             <div class="card">
                 <div class="card-body">
                     <div class="card card-info">
