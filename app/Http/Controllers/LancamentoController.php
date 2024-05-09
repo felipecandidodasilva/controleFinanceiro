@@ -213,6 +213,7 @@ class LancamentoController extends Controller
             ->where('tipo_lancamento', $tipo)
             ->whereBetween('dt_vencimento',[$filtroDtIni, $filtroDtFim] )
             ->groupBy('subgrupos.id')
+            ->orderBy('valor_total')
             ->get();
             ;
             
