@@ -341,6 +341,16 @@ return [
                 ],
             ],
         ],
+        [
+            'text' => 'Relatórios',
+            'icon' => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'Saídas Agrupadas',
+                    'url' => '/lancamentos/relatorio/agrupado/saidas',
+                ],
+            ],
+        ],
     ],
 
     /*

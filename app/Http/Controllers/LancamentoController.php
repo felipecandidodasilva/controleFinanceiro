@@ -181,6 +181,66 @@ class LancamentoController extends Controller
         // dd($subgrupos);
         return view('lancamento.index',compact('lancamentos','infoPagina','subgrupos','formaPagamentos','filtros','subTotal'));
     }
+    public function grupo(string $tipoRota, Request $request)
+    {
+
+        //   $lancamentos = Lancamento::all();
+        $tipo = $tipoRota == 'entradas' ? 'E' : 'S';
+        $tipo = $request->tipo_lancamento ? $request->tipo_lancamento : $tipo; 
+        $filtroLancamento = $request->lancamento ? $request->lancamento : NULL;
+
+
+
+        // dd($tipo);
+
+        $tituloPagina = 'Relatório por Subgrupo';
+        
+        // $lancamentos = Lancamento::with(['formaPagamento','subgrupo'])->where('tipo_lancamento', $tipo)->orderBy('descricao')->get();
+        // FILTROS 
+        if ($request->dt_ini) {
+            $filtroDtIni = $request->dt_ini;
+            $filtroDtFim = $request->dt_fim;
+        } else {
+            $filtroDtIni = Datas::obterPrimeiroDiaDoMes(date('Y-m-d'));
+            $filtroDtFim = Datas::obterUltimoDiaDoMes(date('Y-m-d'));
+        }
+
+        $lancamentos = DB::table('item_lancamentos')
+            ->join('lancamentos', 'lancamentos.id', '=', 'item_lancamentos.lancamento_id')
+            ->join('forma_pagamentos', 'forma_pagamentos.id', '=', 'item_lancamentos.forma_pagamento_id')
+            ->join('subgrupos', 'subgrupos.id', '=', 'lancamentos.subgrupo_id')
+            ->selectRaw('subgrupos.descricao as subgrupo, sum(item_lancamentos.valor) as valor_total')
+            ->where('tipo_lancamento', $tipo)
+            ->whereBetween('dt_vencimento',[$filtroDtIni, $filtroDtFim] )
+            ->groupBy('subgrupos.id')
+            ->get();
+            ;
+            
+        // FILTROS 
+        
+        
+        $infoPagina = [
+            'titulo' => $tituloPagina,
+            'tipoLancamento' => $tipo,
+            'tipoRota' => $tipoRota,
+        ]; 
+        
+        $filtros = [
+            'dt_ini' => $filtroDtIni,
+            'dt_fim' => $filtroDtFim,
+            'lancamento' => $filtroLancamento,
+            'forma_pagamento_id' => $request->forma_pagamento_id,
+            'subgrupo_id' =>$request->subgrupo_id,
+        ];
+        // dd($filtros);
+
+        $subgrupos = subgrupos::orderBy('descricao')->get();
+        $formaPagamentos = FormaPagamento::orderBy('descricao')->get();
+        
+        
+        // dd($subgrupos);
+        return view('relatorios.agrupado',compact('lancamentos','infoPagina','filtros','subgrupos','formaPagamentos'));
+    }
 
     /**
      * Show the form for creating a new resource.
