@@ -25,7 +25,7 @@
                 <div class="card-body">
                     <div class="card card-info">
                         <div class="card-header">
-                            <h1 class="card-title ">Lista de {{$infoPagina['titulo']}}:   Total:  @dinheiro($subTotal['vlrAPagar']) <br>
+                            <h1 class="card-title ">Lista de {{$infoPagina['titulo']}}:   Restam:  @dinheiro($subTotal['vlrAPagar']) <br>
                                   Pago @dinheiro($subTotal['vlrPago']) de @dinheiro($subTotal['vlrTotal']), 
                             </h1>
                             {{-- <div class="card-tools">
@@ -154,11 +154,14 @@
                                         <label class="col-sm-12 col-form-label">Forma Pgto.</label>
                                         <select name="forma_pagamento_id" class="form-control">
                                             @forelse ($formaPagamentos as $formaPagamento )
-                                            
-                                            <option value="{{ $formaPagamento->id}}" 
-                                                @if ($infoPagina['forma_pagamento_id'] == $formaPagamento->id ) selected @endif>
+                                            @if ($formaPagamento->ativo)
                                                 
-                                                {{ $formaPagamento->descricao}}</option>
+                                                <option value="{{ $formaPagamento->id}}" 
+                                                    @if ($infoPagina['forma_pagamento_id'] == $formaPagamento->id ) selected @endif>
+                                                    
+                                                    {{ $formaPagamento->descricao}}
+                                                </option>
+                                            @endif
                                             
                                             @empty
                                             <p>Sem registros</p>
