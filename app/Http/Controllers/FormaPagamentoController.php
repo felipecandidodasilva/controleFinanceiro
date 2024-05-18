@@ -50,7 +50,7 @@ class FormaPagamentoController extends Controller
     {
         //
         $formaPgto = FormaPagamento::find($id);
-        $formasDePagamento =  DB::table('forma_pagamentos')->get();
+        $formasDePagamento =  FormaPagamento::all();
         return view('formapagamento.edit',compact('formaPgto','formasDePagamento'));
     }
 
@@ -59,6 +59,7 @@ class FormaPagamentoController extends Controller
      */
     public function update(Request $request,  string $id)
     {
+        // dd($request->all());
         $registro = FormaPagamento::find($id);
         $registro->update($request->all());
         return redirect()->route('formasdepagamento.index')->with('sucesso', 'Forma de pagamento atualizada com sucesso!!');

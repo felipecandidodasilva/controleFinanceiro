@@ -14,6 +14,7 @@
         </div>
     @endif
     <div id='post-container'></div>
+    {{ Breadcrumbs::render('saidaRapida','saida') }}
   
 @stop
 

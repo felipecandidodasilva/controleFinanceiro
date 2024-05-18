@@ -175,7 +175,7 @@ class LancamentoController extends Controller
         // dd($filtros);
 
         $subgrupos = subgrupos::orderBy('descricao')->get();
-        $formaPagamentos = FormaPagamento::orderBy('descricao')->get();
+        $formaPagamentos = FormaPagamento::orderBy('ativo','desc')->orderBy('descricao')->get();
         
         
         // dd($subgrupos);
@@ -189,13 +189,10 @@ class LancamentoController extends Controller
         $tipo = $request->tipo_lancamento ? $request->tipo_lancamento : $tipo; 
         $filtroLancamento = $request->lancamento ? $request->lancamento : NULL;
 
-
-
         // dd($tipo);
 
         $tituloPagina = 'Relatório por Subgrupo';
         
-        // $lancamentos = Lancamento::with(['formaPagamento','subgrupo'])->where('tipo_lancamento', $tipo)->orderBy('descricao')->get();
         // FILTROS 
         if ($request->dt_ini) {
             $filtroDtIni = $request->dt_ini;

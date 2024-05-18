@@ -13,10 +13,11 @@
             {{ session('falha')}}
         </div>
     @endif
-  
+    {{ Breadcrumbs::render('lancamentos',$infoPagina['titulo'] ) }}
 @stop
 
 @section('content')
+
 @include('forms.filtros')
     <div class="row">
         <div class="col-xl-8 col-md-12">

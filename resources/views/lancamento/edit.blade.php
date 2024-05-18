@@ -3,7 +3,8 @@
 @section('title', 'AdminLTE')
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Lista de {{$infoPagina['titulo']}}</h1>
+    <h1 class="m-0 text-dark">Edição de {{$infoPagina['titulo']}}</h1>
+    {{ Breadcrumbs::render('lancamentos.editar',$lancamento->descricao,$infoPagina['tipoRota'] ) }}
 @stop
 
 @section('content')

@@ -11,7 +11,7 @@ class FormaPagamento extends Model
 {
     use HasFactory;
     protected $table = 'forma_pagamentos';
-    protected $fillable = ['id','descricao','diacompra','diavencimento'];
+    protected $fillable = ['id','descricao','diacompra','diavencimento','ativo'];
 
     public function lancamentos(): HasMany
     {
