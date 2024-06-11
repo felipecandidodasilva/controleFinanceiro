@@ -209,7 +209,7 @@ class LancamentoController extends Controller
             ->selectRaw('subgrupos.descricao as subgrupo, sum(item_lancamentos.valor) as valor_total')
             ->whereBetween('dt_vencimento',[$filtroDtIni, $filtroDtFim] )
             ->groupBy('subgrupos.id')
-            ->orderBy('sum(item_lancamentos.valor)','desc')
+            ->orderBy('valor_total','desc')
             // ->toSql();
             ->get();
             // dd($lancamentos);
