@@ -171,6 +171,7 @@ class LancamentoController extends Controller
             'lancamento' => $filtroLancamento,
             'forma_pagamento_id' => $request->forma_pagamento_id,
             'subgrupo_id' =>$request->subgrupo_id,
+            'rota' =>'lancamentos.filtros',
         ];
         // dd($filtros);
 
@@ -181,12 +182,11 @@ class LancamentoController extends Controller
         // dd($subgrupos);
         return view('lancamento.index',compact('lancamentos','infoPagina','subgrupos','formaPagamentos','filtros','subTotal'));
     }
-    public function grupo(string $tipoRota, Request $request)
+    public function grupo(string $tipoRota,Request $request)
     {
 
         //   $lancamentos = Lancamento::all();
-        $tipo = $tipoRota == 'entradas' ? 'E' : 'S';
-        $tipo = $request->tipo_lancamento ? $request->tipo_lancamento : $tipo; 
+        $rota = 'lancamentos.filtros';
         $filtroLancamento = $request->lancamento ? $request->lancamento : NULL;
 
         // dd($tipo);
@@ -207,7 +207,6 @@ class LancamentoController extends Controller
             ->join('forma_pagamentos', 'forma_pagamentos.id', '=', 'item_lancamentos.forma_pagamento_id')
             ->join('subgrupos', 'subgrupos.id', '=', 'lancamentos.subgrupo_id')
             ->selectRaw('subgrupos.descricao as subgrupo, sum(item_lancamentos.valor) as valor_total')
-            ->where('tipo_lancamento', $tipo)
             ->whereBetween('dt_vencimento',[$filtroDtIni, $filtroDtFim] )
             ->groupBy('subgrupos.id')
             ->orderBy('valor_total','desc')
@@ -219,8 +218,8 @@ class LancamentoController extends Controller
         
         $infoPagina = [
             'titulo' => $tituloPagina,
-            'tipoLancamento' => $tipo,
-            'tipoRota' => $tipoRota,
+            'tipoRota' => 'S',
+            'tipoLancamento' => 'S'
         ]; 
         
         $filtros = [
@@ -229,7 +228,9 @@ class LancamentoController extends Controller
             'lancamento' => $filtroLancamento,
             'forma_pagamento_id' => $request->forma_pagamento_id,
             'subgrupo_id' =>$request->subgrupo_id,
+            'rota' => 'lancamentos.grupo'
         ];
+
         // dd($filtros);
 
         $subgrupos = subgrupos::orderBy('descricao')->get();

@@ -34,7 +34,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         
-                                        <div class="col-lg-3 col-sm-6">
+                                        <div class="col-lg-5 col-sm-6">
                                             <label for="forma_pagamento_id" class="form-label">Forma de Pagamento</label>
                                             <select class="form-control" name="forma_pagamento_id" id="forma_pagamento_id" required>
                                                 @forelse ($formaPagamentos as $formaPagamento )
@@ -54,18 +54,18 @@
                                             </select>
                                         </div>
                                         
-                                        <div class="col-lg-3 col-sm-6">
+                                        <div class="col-lg-2 col-sm-6">
                                             <label for="valor" class="form-label">Valor</label>
                                             <input type="number" step="0.01" class="form-control" name="valor" id="valor" value="{{ old('valor', $itemLancamento->valor) }}" required>
                                         </div>
                                         
-                                        <div class="col-lg-3 col-sm-6">
+                                        <div class="col-lg-2 col-sm-6">
                                             <label for="parcela" class="form-label">Parcela</label>
                                             <input type="number" class="form-control" name="parcela" id="parcela" value="{{ old('parcela', $itemLancamento->parcela) }}" required>
                                         </div>
                                         
                                         <div class="col-lg-3 col-sm-6">
-                                            <label for="dt_vencimento" class="form-label">Data de Vencimento</label>
+                                            <label for="dt_vencimento" class="form-label">Vencimento</label>
                                             <input type="date" class="form-control" name="dt_vencimento" id="dt_vencimento" value="{{ old('dt_vencimento', $itemLancamento->dt_vencimento) }}" required>
                                         </div>
                                         
@@ -119,11 +119,11 @@
                                 <input type="hidden" name="total_parcelas" value="{{$lancamento->total_parcelas}}">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-lg-3 col-sm-12">
+                                        <div class="col-sm-12">
                                             <label for="descricao" class="form-label">Descrição</label>
                                             <input type="text"  class="form-control" name="descricao" id="descricao" value="{{ old('descricao', $lancamento->descricao) }}" required>
                                         </div>
-                                        <div class="col-lg-3 col-sm-12">
+                                        <div class="col-lg-4 col-sm-12">
                                             <label for="subgrupo_id" class="form-label">Sub Grupo</label>
                                             <select class="form-control" name="subgrupo_id" id="subgrupo_id" required>
                                                 @forelse ($subgrupos as $subgrupo )
@@ -142,7 +142,7 @@
                                                 @endforelse
                                             </select>
                                         </div>
-                                        <div class="col-lg-3 col-sm-12">
+                                        <div class="col-lg-4 col-sm-12">
                                             <label for="forma_pagamento_id" class="form-label">Forma de Pagamento</label>
                                             <select class="form-control" name="forma_pagamento_id" id="forma_pagamento_id" required>
                                                 @forelse ($formaPagamentos as $formaPagamento )
@@ -161,19 +161,19 @@
                                                 @endforelse
                                             </select>
                                         </div>
-                                        <div class="col-lg-3 col-sm-12">
+                                        <div class="col-lg-4 col-sm-12">
                                             <label for="dt_compra" class="form-label">Data da compra</label>
                                             <input type="date" class="form-control" name="dt_compra" id="dt_compra" value="{{ old('dt_compra', $lancamento->dt_compra) }}" required>
                                         </div>
-                                        <div class="col-lg-2 col-sm-6">
+                                        <div class="col-lg-3 col-sm-6">
                                             <label for="valor" class="form-label">Valor</label>
                                             <input type="number"  disabled step="0.01" class="form-control" name="valor" id="valor" value="{{ old('valor', $lancamento->valor) }}" required>
                                         </div>
                                         <div class="col-lg-2 col-sm-6">
-                                            <label for="total_parcelas" class="form-label">Total Parcela</label>
+                                            <label for="total_parcelas" class="form-label">Parcelas</label>
                                             <input type="number" disabled class="form-control" name="total_parcelas" id="total_parcelas" value="{{ old('parcela', $lancamento->total_parcelas) }}" required>
                                         </div>
-                                        <div class="col-lg-8 col-sm-12">
+                                        <div class="col-lg-7 col-sm-12">
                                             <label for="obs" class="form-label">Observação</label>
                                             <textarea class="form-control" name="obs" id="obs" rows="3">{{ old('obs', $lancamento->obs) }}</textarea>
                                         </div>
@@ -199,23 +199,20 @@
                         <div class="card-header">
                             <h3 class="card-title">Adicionar Parcelas</h3>
                         </div>
-                        <div class="m-2">
-                            <form action="{{ route('itemLancamento.add', $lancamento->id) }}" method="GET" class="form-inline">
+                            <form action="{{ route('itemLancamento.add', $lancamento->id) }}" method="GET" class="form-row mx-1">
                                 @csrf
-
-                                <form class="form-inline">
-                                    <div class="form-group mb-2">
-                                      <label for="addQtdParc" class="">Quantidade</label>
-                                      <input type="number"  name="addQtdParc" id="addQtdParc" class="form-control" aria-label="Quantidade Parcela">
-                                    </div>
-                                    <div class="form-group mx-sm-3 mb-2">
-                                      <label for="addVlrParc"> Valor Parcela</label>
-                                      <input type="number" step="0.01" name="addVlrParc" id="addVlrParc" class="form-control" aria-label="Valor Parcela" value="{{$itemLancamento->valor}}">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary mb-2"> + </button>
-                                  </form>
-                            </form>
-                        </div>
+                                <div class="col">
+                                    <label for="addQtdParc" class="col-sm-12 col-form-label">Quantidade</label>
+                                    <input type="number"  name="addQtdParc" id="addQtdParc" class="form-control" aria-label="Quantidade Parcela">
+                                </div>
+                                <div class="col">
+                                    <label for="addVlrParc" class="col-sm-12 col-form-label"> Valor</label>
+                                    <input type="number" step="0.01" name="addVlrParc" id="addVlrParc" class="form-control" aria-label="Valor Parcela" value="{{$itemLancamento->valor}}">
+                                </div>
+                                <div class="col">
+                                    <button type="submit" class="btn btn-outline-primary mt-4"> + </button>
+                                </div>
+                                </form>
                     </div>
                 </div>
             </div>
@@ -225,13 +222,14 @@
                         <div class="card-header">
                         <h3 class="card-title">Demais Parcelas  @dinheiro($infoPagina['parcelasPagas']) | @dinheiro($infoPagina['parcelasAVencer']) |  @dinheiro($infoPagina['parcelasTotais'])</h3>
                         </div>
-                            <table class="table table-hover text-nowrap table-responsive">
+                            <table class="table table-hover text-nowrap table-responsive  table-sm ">
                                 <thead>
                                     <tr>
-                                        <th>Data Vencimento</th>
+                                        <th>Vencimento</th>
                                         <th>Valor</th>
                                         <th>Parcela</th>
                                         <th>Pago</th>
+                                        <th>#</th>
                                         <th>#</th>
                                         <th>#</th>
                                     </tr>
@@ -239,28 +237,28 @@
                                 <tbody>
                                     @forelse($demaisParcelas as $parcela)
                                         <tr>
-                                        <td>@dataBr($parcela->dt_vencimento)</td>
-                                        <td>{{$parcela->parcela}}</td>
-                                        <td>@dinheiro($parcela->valor)</td>
-                                        <td>@if ($parcela->pago == 'S')
-                                                Pago
-                                            @else
-                                                A Pagar
-                                            @endif
-                                        </td>
-                                        </td>
-                                        @if ($parcela->pago == 'S')
-                                                <td><a class="btn btn-block btn-success" href="{{ route('lancamento.baixar', ['id' => $parcela->id,'pago' =>'N'])}}"> <i class="fa fa-edit"></i> Retorno</a></td>
+                                            <td>@dataBr($parcela->dt_vencimento)</td>
+                                            <td>@dinheiro($parcela->valor)</td>
+                                            <td>{{$parcela->parcela}}</td>
+                                            <td>@if ($parcela->pago == 'S')
+                                                    Sim
                                                 @else
-                                                <td><a class="btn btn-block btn-secondary" href="{{ route('lancamento.baixar', ['id' => $parcela->id,'pago' =>'S'])}}"> <i class="fa fa-edit"></i> Baixar</a></td>
-                                            @endif
-                                        <td><a class="btn btn-block btn-warning" href="{{ route('lancamento.edit', [$parcela->id])}}"> <i class="fa fa-edit"></i> Editar</a></td>
-                                        <td>
-                                            <form action="{{ route('itemLancamento.excluir',  $parcela->id )}}" method="get">
-                                                @csrf
-                                                <button type="submit" class="btn btn-block btn-danger">Excluir</button>
-                                            </form>
-                                        </td>
+                                                    Não
+                                                @endif
+                                            </td>
+                                            </td>
+                                            @if ($parcela->pago == 'S')
+                                                    <td class='px-1'><a class="btn btn-block btn-outline-success btn-sm" href="{{ route('lancamento.baixar', ['id' => $parcela->id,'pago' =>'N'])}}"> <i class="fa fa-edit"></i> Retorno</a></td>
+                                                    @else
+                                                    <td class='px-1'><a class="btn btn-block btn-outline-secondary btn-sm" href="{{ route('lancamento.baixar', ['id' => $parcela->id,'pago' =>'S'])}}"> <i class="fa fa-edit"></i> Baixar</a></td>
+                                                @endif
+                                            <td class='px-1'><a class="btn btn-blo-outlineck btn-sm btn-warning" href="{{ route('lancamento.edit', [$parcela->id])}}"> <i class="fa fa-edit"></i> Editar</a></td>
+                                            <td class='px-1'>
+                                                <form action="{{ route('itemLancamento.excluir',  $parcela->id )}}" method="get">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-block btn-outline-danger btn-sm">Excluir</button>
+                                                </form>
+                                            </td>
                                         {{-- <td><a class="btn btn-block btn-warning" href="{{ route('lancamento.gerar', [$lancamento->id])}}"> <i class="fa fa-edit"></i> Gerar</a></td> --}}
                                         </tr>
                                         @empty
