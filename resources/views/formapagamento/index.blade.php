@@ -41,7 +41,7 @@
                                         <input type="text" name="descricao" class="form-control" id="inputDescricao" placeholder="Descrição">
                                     </div>
                                     <div class="col-xs-12 col-lg-2">
-                                        <label for="inputCompra" class="col-sm-12 col-form-label">Dia para Compra</label>
+                                        <label for="inputCompra" class="col-sm-12 col-form-label">Dia Compra</label>
                                         <input type="number" name="diacompra" class="form-control" id="inputCompra" >
                                     </div>
                                     <div class="col-xs-12 col-lg-2">

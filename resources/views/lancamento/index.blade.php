@@ -60,6 +60,7 @@
                                 <th>Parcela</th>
                                 <th>Subgrupo</th>
                                 <th>Forma Pagamento</th>
+                                <th>Compra</th>
                             </tr>
                             </thead>
                                 <tbody>
@@ -84,6 +85,7 @@
                                             <td>{{$lancamento->parcela}}/{{$lancamento->total_parcelas}}</td>
                                             <td>{{$lancamento->subgrupo}}</td>
                                             <td>{{$lancamento->formaPagamento}}</td>
+                                            <td>@dataBr($lancamento->dt_compra)</td>
                                             {{-- <td><a class="btn btn-block btn-warning" href="{{ route('lancamento.gerar', [$lancamento->id])}}"> <i class="fa fa-edit"></i> Gerar</a></td> --}}
                                         </tr>
                                         @empty
