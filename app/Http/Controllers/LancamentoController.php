@@ -346,6 +346,46 @@ class LancamentoController extends Controller
         
         return redirect()->back()->with('sucesso', 'Lançamento pago com sucesso!!');
     }
+    public function baixarTodos(Request $request)
+    {
+
+        $lancamentos = DB::table('item_lancamentos')
+        ->join('lancamentos', 'lancamentos.id', '=', 'item_lancamentos.lancamento_id')
+        ->join('forma_pagamentos', 'forma_pagamentos.id', '=', 'item_lancamentos.forma_pagamento_id')
+        ->join('subgrupos', 'subgrupos.id', '=', 'lancamentos.subgrupo_id')
+        ->select('item_lancamentos.id',
+        'item_lancamentos.dt_vencimento',
+        'item_lancamentos.valor',
+        'item_lancamentos.parcela',
+        'item_lancamentos.pago',
+        'lancamentos.descricao as lancamento',
+        'lancamentos.total_parcelas',
+        'lancamentos.dt_compra',
+        'forma_pagamentos.descricao as formaPagamento',
+        'subgrupos.descricao as subgrupo' )
+        ->where('tipo_lancamento', $request->tipo_lancamento)
+        ->whereBetween('dt_vencimento',[$request->dt_ini, $request->dt_fim] );
+        
+        if ($request->forma_pagamento_id || $request->forma_pagamento_id != 0) {
+            $lancamentos->where('item_lancamentos.forma_pagamento_id', $request->forma_pagamento_id);
+        }
+        
+        if ($request->subgrupo_id || $request->subgrupo_id != 0) {
+            $lancamentos->where('lancamentos.subgrupo_id', $request->subgrupo_id);
+        }
+
+        $lancamentos->update(['pago' => 'S']);
+        
+        // dd($lancamentos);
+        // dd($request->all());
+        // // $registro = Item_lancamento::find($id);
+        // $lancamento = Lancamento::find($registro->lancamento_id);
+        // $tipo = $lancamento->tipo_lancamento;
+        // $registro->pago = $pago;
+        // $registro->save();
+        
+        return redirect()->back()->with('sucesso', 'Lançamento pago com sucesso!!');
+    }
     public function gerarParcelas(Lancamento $lancamento)
     {
 

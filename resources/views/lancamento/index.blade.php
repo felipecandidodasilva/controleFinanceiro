@@ -25,26 +25,25 @@
                 <div class="card-body">
                     <div class="card card-info">
                         <div class="card-header">
-                            <h1 class="card-title ">Lista de {{$infoPagina['titulo']}}:   Restam:  @dinheiro($subTotal['vlrAPagar']) <br>
-                                  Pago @dinheiro($subTotal['vlrPago']) de @dinheiro($subTotal['vlrTotal']), 
-                            </h1>
-                            {{-- <div class="card-tools">
-                                <form action="{{ route('lancamentos.filtros',['tipo' => $infoPagina['tipoRota'] ] ) }}" method="get" class="row row-cols-lg-auto g-3 align-items-center mt-2">
-                                    <div class="input-group input-group-sm" style="width: 150px;">
+                            <div class="row">
+                                <div class="col">
+                                    <h1 class="card-title ">Lista de {{$infoPagina['titulo']}}:   Restam:  @dinheiro($subTotal['vlrAPagar']) <br>
+                                        Pago @dinheiro($subTotal['vlrPago']) de @dinheiro($subTotal['vlrTotal']), 
+                                    </h1>
+                                </div>
+                                <div class="col">
+                                    <form action="{{ route('lancamento.baixarTodos') }}" method="post">
+                                        @csrf
                                         <input type="hidden" value="{{$infoPagina['tipoLancamento']}}" name='tipo_lancamento'>
-                                        <input type="hidden" value="{{$filtros['subgrupo_id']}}" name='subgrupo_id'>
-                                        <input type="hidden" value="{{$filtros['forma_pagamento_id']}}" name='forma_pagamento_id'>
-                                        <input type="hidden" value="{{$filtros['dt_ini']}}" name='dt_ini'>
-                                        <input type="hidden" value="{{$filtros['dt_fim']}}" name='dt_fim'>
-                                        <input type="text" class="form-control float-right" placeholder="Search" name="lancamento" value="{{$filtros['lancamento']}}">
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default">
-                                                <i class="fas fa-search"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div> --}}
+                                        <input type="hidden" name="dt_ini" value="{{$filtros['dt_ini']}}">
+                                        <input type="hidden" name="dt_fim" value="{{$filtros['dt_fim']}}">
+                                        <input type="hidden" name="forma_pagamento_id" value="{{$filtros['forma_pagamento_id']}}">
+                                        <input type="hidden" name="subgrupo_id" value="{{$filtros['subgrupo_id']}}">
+                                        <input type="hidden" name="subgrupo_id" value="{{$filtros['subgrupo_id']}}">
+                                        <button type="submit" class="btn btn-dark">Baixar Todos</button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="card-body table-responsive p-0">
