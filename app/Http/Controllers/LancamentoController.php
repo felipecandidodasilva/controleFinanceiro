@@ -399,7 +399,6 @@ class LancamentoController extends Controller
             
             if($i > 0)
                 {
-                    dd($i);
                     $dt_vencimento = Datas::adicionaMes($dt_vencimento);
                 }
                 // echo $dt_vencimento . "<br>";
