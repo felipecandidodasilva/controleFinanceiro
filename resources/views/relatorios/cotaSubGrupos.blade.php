@@ -30,7 +30,7 @@
                                 <tbody>
                                     @forelse($lancamentos as $lancamento)
                                         <tr>
-                                            <td>{{$lancamento->subgrupo}}</td>
+                                            <td>{{ $lancamento->id . ' - ' . $lancamento->subgrupo}}</td>
                                             <td>@dinheiro($lancamento->cota)</td>
                                             <td>@dinheiro($lancamento->valor_gasto)</td>
                                             <td>@dinheiro($lancamento->valor_restante)</td>

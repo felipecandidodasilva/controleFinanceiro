@@ -262,7 +262,7 @@ class LancamentoController extends Controller
         $lancamentos = DB::table('item_lancamentos')
             ->join('lancamentos', 'lancamentos.id', '=', 'item_lancamentos.lancamento_id')
             ->join('subgrupos', 'subgrupos.id', '=', 'lancamentos.subgrupo_id')
-            ->selectRaw('subgrupos.descricao as subgrupo, subgrupos.cota, sum(item_lancamentos.valor) as valor_gasto, IFNULL(subgrupos.cota,0) - sum(item_lancamentos.valor) as valor_restante')
+            ->selectRaw('subgrupos.id, subgrupos.descricao as subgrupo, subgrupos.cota, sum(item_lancamentos.valor) as valor_gasto, IFNULL(subgrupos.cota,0) - sum(item_lancamentos.valor) as valor_restante')
             ->whereBetween('dt_vencimento',[$filtroDtIni, $filtroDtFim] )
             ->groupBy('subgrupos.id')
             ->orderBy('subgrupos.descricao')
