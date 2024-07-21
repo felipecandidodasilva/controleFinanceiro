@@ -45,6 +45,7 @@ Route::get('/lancamento/gerar/{id}', [App\Http\Controllers\LancamentoController:
 Route::get('/lancamento/baixar/{id}/{pago}', [App\Http\Controllers\LancamentoController::class, 'baixar'])->name('lancamento.baixar')->middleware('auth');
 Route::post('/lancamento/baixarTodos/', [App\Http\Controllers\LancamentoController::class, 'baixarTodos'])->name('lancamento.baixarTodos')->middleware('auth');
 Route::get('/lancamentos/relatorio/agrupado/{tipo}', [App\Http\Controllers\LancamentoController::class, 'grupo'])->name('lancamentos.grupo')->middleware('auth');
+Route::get('/lancamentos/relatorio/cota/subgrupo', [App\Http\Controllers\LancamentoController::class, 'cotaSubgrupos'])->name('relatorios.cota.subgrupos')->middleware('auth');
 
 Route::get('/lancamentos/saida/rapida', [App\Http\Controllers\LancamentoController::class, 'rapida'])->name('lancamentos.rapida')->middleware('auth');
 

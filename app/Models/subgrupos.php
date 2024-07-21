@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class subgrupos extends Model
 {
     use HasFactory;
-    protected $fillable = ['descricao','grupo_id'];
+    protected $fillable = ['descricao','grupo_id','cota'];
 
     public function grupo(): BelongsTo
         {

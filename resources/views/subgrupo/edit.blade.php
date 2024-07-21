@@ -95,10 +95,15 @@
                                         </select>
                                     </div>
                                     
-                                    <div class="col-8">
+                                    <div class="col-6">
                                         <input type="hidden" name="id" value="{{ $subgrupo->id }}">
                                         <label for="inputDescricao" class="col-sm-12 col-form-label">Descrição</label>
                                         <input type="text" name="descricao" class="form-control" id="inputDescricao" value="{{ $subgrupo->descricao }}">
+                                    </div>
+                                    <div class="col-2">
+                                        <input type="hidden" name="id" value="{{ $subgrupo->id }}">
+                                        <label for="inputCota" class="col-sm-12 col-form-label">Cota</label>
+                                        <input type="number" min=0 step="0.01" name="cota" class="form-control" id="inputCota" value="{{ $subgrupo->cota }}">
                                     </div>
                                 </div>
                             </div>

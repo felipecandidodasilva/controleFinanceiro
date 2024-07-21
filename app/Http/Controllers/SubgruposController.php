@@ -69,6 +69,11 @@ class SubgruposController extends Controller
     {
         $registro = subgrupos::find($id);
         $registro->update($request->all());
+
+        // Novo campo com a cota do subgrupo
+        
+        $registro->update(['cota' => $request->cota]);
+
         return redirect()->route('subgrupos.index')->with('sucesso', 'Subgrupo atualizado com sucesso!!');
     }
 

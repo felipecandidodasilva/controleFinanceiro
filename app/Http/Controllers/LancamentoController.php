@@ -240,6 +240,63 @@ class LancamentoController extends Controller
         // dd($subgrupos);
         return view('relatorios.agrupado',compact('lancamentos','infoPagina','filtros','subgrupos','formaPagamentos'));
     }
+    public function cotaSubgrupos(Request $request)
+    {
+
+        //   $lancamentos = Lancamento::all();
+        $rota = 'relatorios.cota.subgrupos';
+
+        // dd($tipo);
+
+        $tituloPagina = 'Relatório por Subgrupo';
+        
+        // FILTROS 
+        if ($request->dt_ini) {
+            $filtroDtIni = $request->dt_ini;
+            $filtroDtFim = $request->dt_fim;
+        } else {
+            $filtroDtIni = Datas::obterPrimeiroDiaDoMes(date('Y-m-d'));
+            $filtroDtFim = Datas::obterUltimoDiaDoMes(date('Y-m-d'));
+        }
+
+        $lancamentos = DB::table('item_lancamentos')
+            ->join('lancamentos', 'lancamentos.id', '=', 'item_lancamentos.lancamento_id')
+            ->join('subgrupos', 'subgrupos.id', '=', 'lancamentos.subgrupo_id')
+            ->selectRaw('subgrupos.descricao as subgrupo, subgrupos.cota, sum(item_lancamentos.valor) as valor_gasto, IFNULL(subgrupos.cota,0) - sum(item_lancamentos.valor) as valor_restante')
+            ->whereBetween('dt_vencimento',[$filtroDtIni, $filtroDtFim] )
+            ->groupBy('subgrupos.id')
+            ->orderBy('subgrupos.descricao')
+            // ->toSql();
+            ->get();
+            // dd($lancamentos);
+        // FILTROS 
+        
+        
+        $infoPagina = [
+            'titulo' => $tituloPagina,
+            'tipoRota' => NULL,
+              'tipoLancamento' => NULL
+        ]; 
+        
+        $filtros = [
+            'dt_ini' => $filtroDtIni,
+            'dt_fim' => $filtroDtFim,
+            'subgrupo_id' =>$request->subgrupo_id,
+            'rota' => $rota,
+            'lancamento' => NULL,
+            'forma_pagamento_id' => NULL,
+            'subgrupo_id' =>$request->subgrupo_id,
+        ];
+
+        // dd($filtros);
+
+        $subgrupos = subgrupos::orderBy('descricao')->get();
+        $formaPagamentos = FormaPagamento::orderBy('descricao')->get();
+        
+        
+        // dd($subgrupos);
+        return view('relatorios.cotaSubGrupos',compact('lancamentos','infoPagina','filtros','subgrupos','formaPagamentos'));
+    }
 
     /**
      * Show the form for creating a new resource.

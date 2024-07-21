@@ -349,6 +349,10 @@ return [
                     'text' => 'Saídas Agrupadas',
                     'url' => '/lancamentos/relatorio/agrupado/saidas',
                 ],
+                [
+                    'text' => 'Cota Sub Grupos',
+                    'url' => '/lancamentos/relatorio/cota/subgrupo',
+                ],
             ],
         ],
     ],
