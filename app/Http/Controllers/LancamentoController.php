@@ -207,6 +207,7 @@ class LancamentoController extends Controller
             ->join('forma_pagamentos', 'forma_pagamentos.id', '=', 'item_lancamentos.forma_pagamento_id')
             ->join('subgrupos', 'subgrupos.id', '=', 'lancamentos.subgrupo_id')
             ->selectRaw('subgrupos.descricao as subgrupo, sum(item_lancamentos.valor) as valor_total')
+            ->where('tipo_lancamento','S' )
             ->whereBetween('dt_vencimento',[$filtroDtIni, $filtroDtFim] )
             ->groupBy('subgrupos.id')
             ->orderBy('valor_total','desc')
@@ -264,6 +265,7 @@ class LancamentoController extends Controller
             ->join('subgrupos', 'subgrupos.id', '=', 'lancamentos.subgrupo_id')
             ->selectRaw('subgrupos.id, subgrupos.descricao as subgrupo, subgrupos.cota, sum(item_lancamentos.valor) as valor_gasto, IFNULL(subgrupos.cota,0) - sum(item_lancamentos.valor) as valor_restante')
             ->whereBetween('dt_vencimento',[$filtroDtIni, $filtroDtFim] )
+            ->where('tipo_lancamento','S' )
             ->groupBy('subgrupos.id')
             ->orderBy('subgrupos.descricao')
             // ->toSql();
